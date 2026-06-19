@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedario dei Siti &mdash; Esame Guida Turistica 2026</title>
+<meta name="description" content="Indice consultabile dei siti culturali, musei e luoghi della prova tecnico-pratica per l'esame di abilitazione a guida turistica, Bando 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --paper:#F5EFE0;
+  --paper-card:#FFFCF4;
+  --ink:#21222B;
+  --ink-soft:#5B5A63;
+  --ink-faint:#8A8878;
+  --rule:#DCD2B8;
+  --rule-strong:#C9BC9A;
+
+  --sec-a:#B2502F;   /* Sezione I  - terracotta */
+  --sec-a-soft:#F1DDCF;
+  --sec-b:#3C7A6A;   /* Sezione II - bronzo/patina */
+  --sec-b-soft:#D9E9E2;
+  --sec-c:#28415E;   /* Sezione III - blu inchiostro */
+  --sec-c-soft:#DCE3EC;
+
+  --gold:#A9802F;
+  --gold-soft:#F1E5C8;
+
+  --shadow-card: 0 1px 2px rgba(33,34,43,.06), 0 1px 0 rgba(33,34,43,.04);
+  --radius: 3px;
+
+  --font-display:'Fraunces', Georgia, serif;
+  --font-body:'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:'IBM Plex Mono', ui-monospace, monospace;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse at top, rgba(178,80,47,.05), transparent 55%),
+    var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:inherit;}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header{
+  padding:3.2rem 1.5rem 2rem;
+  max-width:1180px;
+  margin:0 auto;
+  border-bottom:1px solid var(--rule);
+}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  display:flex;
+  align-items:center;
+  gap:.6em;
+  margin-bottom:.9rem;
+}
+.eyebrow::before{
+  content:'';
+  width:22px;height:1px;background:var(--ink-faint);
+  display:inline-block;
+}
+h1{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:clamp(2.1rem, 4.4vw, 3.4rem);
+  line-height:1.04;
+  letter-spacing:-.01em;
+  margin:0 0 .65rem;
+}
+h1 em{
+  font-style:italic;
+  font-weight:400;
+  color:var(--sec-a);
+}
+.lede{
+  max-width:640px;
+  color:var(--ink-soft);
+  font-size:1.02rem;
+  margin:0 0 1.8rem;
+}
+.stat-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0;
+  border:1px solid var(--rule-strong);
+  background:var(--paper-card);
+  width:fit-content;
+}
+.stat{
+  padding:.7rem 1.3rem;
+  border-right:1px solid var(--rule);
+  text-align:left;
+}
+.stat:last-child{border-right:none;}
+.stat .n{
+  font-family:var(--font-display);
+  font-size:1.5rem;
+  font-weight:600;
+  display:block;
+  line-height:1.1;
+}
+.stat .lab{
+  font-family:var(--font-mono);
+  font-size:.66rem;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+}
+.stat.a .n{color:var(--sec-a);}
+.stat.b .n{color:var(--sec-b);}
+.stat.c .n{color:var(--sec-c);}
+.stat.u .n{color:var(--gold);}
+
+/* ============================================================
+   CONTROLS (sticky)
+   ============================================================ */
+.controls{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(245,239,224,.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--rule-strong);
+}
+.controls-inner{
+  max-width:1180px;
+  margin:0 auto;
+  padding:.85rem 1.5rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.6rem;
+  align-items:center;
+}
+.search-wrap{
+  position:relative;
+  flex:1 1 240px;
+  min-width:200px;
+}
+.search-wrap svg{
+  position:absolute;left:.65rem;top:50%;transform:translateY(-50%);
+  width:15px;height:15px;color:var(--ink-faint);pointer-events:none;
+}
+#search{
+  width:100%;
+  font-family:var(--font-body);
+  font-size:.92rem;
+  padding:.55rem .8rem .55rem 2.1rem;
+  border:1px solid var(--rule-strong);
+  background:var(--paper-card);
+  color:var(--ink);
+  border-radius:var(--radius);
+}
+#search:focus{outline:2px solid var(--sec-c); outline-offset:1px;}
+#search::placeholder{color:var(--ink-faint);}
+
+.seg{
+  display:flex;
+  border:1px solid var(--rule-strong);
+  border-radius:var(--radius);
+  overflow:hidden;
+  flex:0 0 auto;
+}
+.seg button{
+  font-family:var(--font-mono);
+  font-size:.74rem;
+  letter-spacing:.03em;
+  padding:.55rem .8rem;
+  background:var(--paper-card);
+  border:none;
+  border-right:1px solid var(--rule-strong);
+  color:var(--ink-soft);
+  cursor:pointer;
+  white-space:nowrap;
+}
+.seg button:last-child{border-right:none;}
+.seg button:hover{background:var(--rule-soft, #efe6cf);}
+.seg button.active{background:var(--ink); color:var(--paper-card);}
+.seg button[data-sec="A"].active{background:var(--sec-a);}
+.seg button[data-sec="B"].active{background:var(--sec-b);}
+.seg button[data-sec="C"].active{background:var(--sec-c);}
+
+select#categoryFilter{
+  font-family:var(--font-body);
+  font-size:.85rem;
+  padding:.55rem .7rem;
+  border:1px solid var(--rule-strong);
+  background:var(--paper-card);
+  color:var(--ink);
+  border-radius:var(--radius);
+  flex:0 0 auto;
+  max-width:230px;
+}
+
+.toggle-unesco{
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  font-family:var(--font-mono);
+  font-size:.74rem;
+  letter-spacing:.03em;
+  padding:.55rem .8rem;
+  border:1px solid var(--rule-strong);
+  border-radius:var(--radius);
+  background:var(--paper-card);
+  cursor:pointer;
+  color:var(--ink-soft);
+  user-select:none;
+  flex:0 0 auto;
+}
+.toggle-unesco input{accent-color:var(--gold); width:14px;height:14px;}
+.toggle-unesco.active{background:var(--gold-soft); border-color:var(--gold); color:#5c4814;}
+
+.results-count{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--ink-faint);
+  margin-left:auto;
+  white-space:nowrap;
+}
+
+/* ============================================================
+   SECTION GROUPS
+   ============================================================ */
+main{max-width:1180px; margin:0 auto; padding:0 1.5rem 5rem;}
+
+.section-group{margin-top:2.6rem;}
+.section-group-head{
+  display:flex;
+  align-items:baseline;
+  gap:.8rem;
+  margin-bottom:1.1rem;
+  padding-bottom:.6rem;
+  border-bottom:2px solid var(--ink);
+}
+.section-group-head h2{
+  font-family:var(--font-display);
+  font-size:1.5rem;
+  font-weight:600;
+  margin:0;
+}
+.section-group-head .count{
+  font-family:var(--font-mono);
+  font-size:.78rem;
+  color:var(--ink-faint);
+}
+.section-group[data-sec="A"] .section-group-head{border-color:var(--sec-a);}
+.section-group[data-sec="B"] .section-group-head{border-color:var(--sec-b);}
+.section-group[data-sec="C"] .section-group-head{border-color:var(--sec-c);}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(310px, 1fr));
+  gap:1rem;
+}
+
+/* ============================================================
+   CARD ("scheda")
+   ============================================================ */
+.card{
+  position:relative;
+  background:var(--paper-card);
+  border:1px solid var(--rule-strong);
+  border-left:5px solid var(--card-accent, var(--ink));
+  box-shadow:var(--shadow-card);
+  padding:1rem 1.1rem 1.05rem 1.05rem;
+  display:flex;
+  flex-direction:column;
+  gap:.55rem;
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(33,34,43,.10), 0 1px 0 rgba(33,34,43,.04);
+}
+.card-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:.5rem;
+}
+.card-id{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  letter-spacing:.05em;
+  color:#fff;
+  background:var(--card-accent, var(--ink));
+  padding:.18rem .45rem;
+  border-radius:2px;
+}
+.card-icon{
+  width:22px;height:22px;
+  color:var(--card-accent, var(--ink));
+  opacity:.75;
+  flex-shrink:0;
+}
+.card-icon svg{width:100%;height:100%;}
+
+.card h3{
+  font-family:var(--font-display);
+  font-size:1.12rem;
+  font-weight:600;
+  line-height:1.22;
+  margin:0;
+}
+
+.card-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem .6rem;
+  font-family:var(--font-mono);
+  font-size:.71rem;
+  color:var(--ink-soft);
+}
+.card-meta .tag{
+  display:inline-flex;
+  align-items:center;
+  gap:.3em;
+}
+.card-meta .tag svg{width:11px;height:11px;opacity:.65;}
+
+.unesco-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.3em;
+  font-family:var(--font-mono);
+  font-size:.64rem;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:#5c4814;
+  background:var(--gold-soft);
+  border:1px solid var(--gold);
+  padding:.16rem .4rem;
+  border-radius:2px;
+  width:fit-content;
+}
+.unesco-badge svg{width:10px;height:10px;}
+
+.card-category{
+  font-family:var(--font-mono);
+  font-size:.66rem;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+}
+
+hr.rule{
+  border:none;
+  border-top:1px dashed var(--rule-strong);
+  margin:.15rem 0;
+}
+
+.bullets{
+  list-style:none;
+  margin:0; padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:.4rem;
+  font-size:.86rem;
+  color:var(--ink-soft);
+  line-height:1.42;
+}
+.bullets li{
+  position:relative;
+  padding-left:.85rem;
+}
+.bullets li::before{
+  content:'';
+  position:absolute;
+  left:0; top:.45em;
+  width:5px; height:1.5px;
+  background:var(--card-accent, var(--ink));
+  opacity:.6;
+}
+
+.no-results{
+  text-align:center;
+  padding:3.5rem 1rem;
+  color:var(--ink-faint);
+  font-family:var(--font-mono);
+  font-size:.85rem;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  max-width:1180px;
+  margin:0 auto;
+  padding:2.5rem 1.5rem 4rem;
+  border-top:1px solid var(--rule);
+  color:var(--ink-faint);
+  font-size:.78rem;
+  line-height:1.6;
+}
+footer strong{color:var(--ink-soft);}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:640px){
+  .site-header{padding:2.2rem 1.1rem 1.6rem;}
+  .controls-inner{padding:.7rem 1.1rem;}
+  main{padding:0 1.1rem 4rem;}
+  .results-count{order:10; width:100%; margin-left:0; padding-top:.3rem;}
+  .grid{grid-template-columns:1fr;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important; scroll-behavior:auto !important;}
+}
+
+/* ============================================================
+   MAP VIEW
+   ============================================================ */
+#map-view{
+  display:none;
+  height:calc(100vh - 57px);
+  position:sticky;
+  top:57px;
+}
+#map-view.active{display:block;}
+main.map-active,footer.map-active{display:none;}
+
+.leaflet-popup-content-wrapper{border-radius:3px;padding:0;}
+.leaflet-popup-content{margin:0;padding:0;}
+.map-popup{
+  font-family:var(--font-body);
+  padding:.75rem .9rem .8rem;
+  min-width:190px;
+  max-width:240px;
+}
+.map-popup-id{
+  font-family:var(--font-mono);
+  font-size:.65rem;
+  letter-spacing:.05em;
+  color:#fff;
+  padding:.15rem .4rem;
+  border-radius:2px;
+  display:inline-block;
+  margin-bottom:.35rem;
+}
+.map-popup h4{
+  font-family:var(--font-display);
+  font-size:.98rem;
+  font-weight:600;
+  line-height:1.2;
+  margin:.2rem 0 .25rem;
+}
+.map-popup-meta{
+  font-family:var(--font-mono);
+  font-size:.66rem;
+  color:var(--ink-soft);
+  line-height:1.4;
+}
+.map-popup-unesco{
+  font-family:var(--font-mono);
+  font-size:.64rem;
+  color:#5c4814;
+  background:var(--gold-soft);
+  border:1px solid var(--gold);
+  padding:.12rem .35rem;
+  border-radius:2px;
+  display:inline-block;
+  margin-top:.3rem;
+}
+</style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Leaflet + MapLibre GL for map view -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.21/leaflet-maplibre-gl.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="eyebrow">Bando 2026 &middot; Esame di abilitazione a Guida Turistica</div>
+  <h1>Indice interattivo dei <em>siti</em> d&rsquo;esame</h1>
+  <p class="lede">Indice consultabile di tutti i siti inseriti nel programma d'esame per il conseguimento dell’abilitazione all’esercizio della professione di guida turistica</p>
+  <div class="stat-row" id="statRow"><!-- filled by JS --></div>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search" placeholder="Cerca per nome, regione, localit&agrave;&hellip;" autocomplete="off">
+    </div>
+    <div class="seg" id="secSeg">
+      <button data-sec="ALL" class="active">Tutte</button>
+      <button data-sec="A">Sezione I</button>
+      <button data-sec="B">Sezione II</button>
+      <button data-sec="C">Sezione III</button>
+    </div>
+    <select id="categoryFilter"><option value="ALL">Tutte le tipologie</option></select>
+    <label class="toggle-unesco" id="unescoToggleWrap">
+      <input type="checkbox" id="unescoToggle">
+      <span>Solo UNESCO</span>
+    </label>
+    <div class="seg" id="viewSeg">
+      <button data-view="cards" class="active"><i class="fa-regular fa-file-lines"></i> Schede</button>
+      <button data-view="map"><i class="fa-solid fa-map"></i> Mappa</button>
+    </div>
+    <div class="results-count" id="resultsCount"></div>
+  </div>
+</div>
+
+<main id="main"></main>
+
+<div id="map-view"></div>
+
+<footer>
+  <p><strong>Attenzione!</strong> Specialmente per le sezioni I e II, verificare <i>sempre</i> le informazioni riportate dalle schede.</p>
+  <p>Licenza CC-BY-SA-NC Manuele Veggi, 2026.</p>
+</footer>
+
+<script>
+const DATA = [{"id":"A001","s":"A","t":"Parco del Gran Sasso","r":"Abruzzo","l":"","u":true,"c":"Parco Naturale / Paesaggio","b":["Il Parco Nazionale del Gran Sasso e Monti della Laga è una delle aree protette più estese d'Italia, istituito nel 1991, con una superficie di circa 150.000 ettari che si estende tra le province dell'Aquila, Teramo e Pescara.","Il massiccio del Gran Sasso d'Italia ospita il Corno Grande, la vetta più alta degli Appennini a 2.912 m s.l.m., e il Ghiacciaio del Calderone, l'unico ghiacciaio presente nell'Appennino e uno dei più meridionali d'Europa, oggi fortemente ridotto per effetto del cambiamento climatico.","Il parco custodisce una straordinaria biodiversità: flora di rilevanza scientifica con specie endemiche come la Viola di Corsini, e fauna ricca di specie simbolo quali il camoscio appenninico, il lupo, l'orso marsicano e l'aquila reale."]},{"id":"A002","s":"A","t":"Costa dei Trabocchi","r":"Abruzzo","l":"","u":false,"c":"Paesaggio Culturale","b":["La Costa dei Trabocchi è un tratto costiero di circa 45 km nella provincia di Chieti, che si estende da Ortona a Vasto, il cui nome deriva dalle caratteristiche strutture lignee di pesca, i \"trabocchi\", che si protendono sul mare Adriatico.","Queste palafitte su palafitte, costruite a partire dal XVII secolo da pescatori locali, sono ormai diventate il simbolo identitario di questa costa e oggi molte sono state riconvertite in ristoranti sul mare dove gustare il pesce fresco appena pescato.","La costa è stata recentemente valorizzata dalla Via Verde, una pista ciclopedonale di 42 km che corre sull'ex sedime ferroviario costiero dismesso, inaugurata nel 2020, e permette di pedalare o camminare con vista sul mare tra tunnel, viadotti e trabocchi."]},{"id":"A003","s":"A","t":"Dolomiti Lucane","r":"Basilicata","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["Le Dolomiti Lucane sono una formazione rocciosa di straordinaria bellezza paesaggistica situata in Basilicata, nel cuore dell'Appennino lucano, tra i comuni di Castelmezzano e Pietrapertosa, in provincia di Potenza.","Nonostante il nome richiami le più note Dolomiti trentine, queste rocce non hanno la stessa composizione geologica: si tratta di falesie di argilla compatta e conglomerati modellati dall'erosione in guglie, pinnacoli e pareti verticali che si innalzano fino a 1.300 metri, creando un paesaggio lunare di rara suggestione.","I due borghi di Castelmezzano e Pietrapertosa, arroccati sulle rocce e inclusi nel club dei \"Borghi più Belli d'Italia\", sono collegati dal \"Volo dell'Angelo\", un'attrazione turistica unica: due cavi d'acciaio che attraversano la vallata permettono di volare a 120 km/h tra i due paesi a centinaia di metri di quota, offrendo un'esperienza adrenalinica e una visuale aerea mozzafiato sul paesaggio lucano."]},{"id":"A004","s":"A","t":"Complesso Archeologico di Metaponto","r":"Basilicata","l":"","u":false,"c":"Sito Archeologico","b":["Metaponto fu una delle più importanti colonie greche della Magna Grecia, fondata intorno al 690 a.C. da coloni achei provenienti dal Peloponneso, sulle rive dello Ionio, in provincia di Matera.","La città raggiunse il suo apice tra il VI e il V secolo a.C. diventando un centro culturale e commerciale di primo piano: qui visse e morì il matematico e filosofo Pitagora di Samo, che aveva fondato in questa città la sua scuola filosofica dopo aver lasciato Crotone.","Il Parco Archeologico di Metaponto custodisce testimonianze monumentali di grande valore: le Tavole Palatine, un peristilio dorico a 15 colonne di un tempio dedicato probabilmente ad Era (VI sec. a.C.), sono il monumento più imponente e meglio conservato dell'intera Magna Grecia ionica."]},{"id":"A005","s":"A","t":"Parco Nazionale del Pollino","r":"Basilicata / Calabria","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["Il Parco Nazionale del Pollino, istituito nel 1993, è il più grande parco nazionale d'Italia con i suoi 192.565 ettari, a cavallo tra Basilicata e Calabria.","Il massiccio del Pollino, con le sue vette che superano i 2.200 metri (Serra Dolcedorme, 2.267 m, e il Serra delle Ciavole, 2.127 m), è caratterizzato da una geologia prevalentemente calcarea che ha originato paesaggi carsici, gole profonde, doline e grotte.","Il simbolo botanico del parco è il Pino Loricato (Pinus leucodermis), un albero dalle forme contorte e resistentissimo ai venti e alle nevi, che cresce sulle vette più alte e può raggiungere i mille anni di età: alcuni esemplari monumentali sono diventati veri e propri simboli del territorio."]},{"id":"A006","s":"A","t":"Centro storico di Gerace","r":"Calabria","l":"","u":true,"c":"Centro Storico / Città","b":["Gerace è un borgo medievale della Calabria, in provincia di Reggio Calabria, arroccato su uno sperone di roccia a 475 m s.l.m. con una posizione difensiva naturale che ne ha determinato la nascita e la fortuna nel Medioevo.","Fondata dai profughi dell'antica Locri Epizefiri dopo le incursioni arabe del IX-X secolo, Gerace divenne sede vescovile e uno dei centri più importanti della Calabria normanna e angioina.","Il monumento più imponente è la Cattedrale di Gerace, la più grande della Calabria, costruita dai Normanni nell'XI secolo sulle fondamenta di una preesistente chiesa bizantina: la struttura a tre navate con 26 colonne di marmo e granito provenienti dall'antica Locri è un capolavoro dell'architettura romanica meridionale."]},{"id":"A007","s":"A","t":"Museo e Parco Archeologico di Locri Epizefiri","r":"Calabria","l":"","u":false,"c":"Museo","b":["Locri Epizefiri fu la prima colonia greca a darsi un codice di leggi scritto, il \"Codice di Zaleuco\" (VII sec. a.C.), primo esempio di legislazione scritta nel mondo greco-occidentale.","Fondata intorno al 680 a.C. da coloni provenienti da Locri Opunzia (Grecia centrale), la città sorgeva sulla costa ionica calabrese in quella che oggi è la città moderna di Locri, in provincia di Reggio Calabria, e fu una fiorente metropoli greca per oltre un millennio.","Il Parco Archeologico di Locri Epizefiri si estende su un'area di circa 1.700 ettari e comprende resti di mura di cinta, un teatro di epoca ellenistica ancora in parte visibile, il Santuario di Persefone (Kore), divinità protettrice della città di cui si sono recuperati migliaia di pinakes (tavolette votive in terracotta), e il Tempio di Zeus."]},{"id":"A008","s":"A","t":"Cattolica di Stilo","r":"Calabria","l":"","u":false,"c":"Sito Religioso","b":["La Cattolica di Stilo è un piccolo gioiello dell'architettura bizantina, considerato uno dei monumenti più importanti e meglio conservati dell'arte paleocristiana orientale in Italia.","Costruita probabilmente tra il IX e il X secolo d.C. nel periodo di dominazione bizantina della Calabria, la chiesa si trova sul versante del Monte Consolino, sopra il borgo di Stilo, in provincia di Reggio Calabria.","La struttura è di planimetria quadrata con cinque cupole, quattro agli angoli e una centrale più elevata, ispirata alla tipologia della chiesa a croce greca inscritta tipica dell'architettura costantinopolitana."]},{"id":"A009","s":"A","t":"Parco Archeologico di Sibari","r":"Calabria","l":"","u":false,"c":"Sito Archeologico","b":["Sibari fu la più potente e lussuosa città della Magna Grecia: fondata intorno al 720 a.C. da coloni achei nella pianura del fiume Crati (Cosenza), raggiunse al suo apice una popolazione stimata di 300.000 abitanti – cifra eccezionale per l'antichità – e divenne sinonimo di sfarzo e mollezza (da qui il termine \"sibarita\").","La città fu distrutta nel 510 a.C. dai Crotoniati che deviarono le acque del Crati per sommergere il sito; in seguito sorse Thurii (444 a.C., fondata con Erodoto tra i coloni), poi Copia romana (193 a.C.).","La fama di Sibari come città del lusso e della raffinatezza gastronomica era già proverbiale nell'antichità: Ateneo di Naucrati, nel suo \"Deipnosofisti\" (II-III sec. d.C.), raccoglie decine di aneddoti sulle stravaganze dei Sibariti."]},{"id":"A010","s":"A","t":"Le Castella (Isola di Capo Rizzuto)","r":"Calabria","l":"","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["Le Castella è un piccolo borgo marinaro della costa ionica calabrese, nel Comune di Isola di Capo Rizzuto (Crotone), dominato da un'imponente fortezza aragonese che sorge su un isolotto collegato alla terraferma da un sottile istmo, creando uno dei panorami più pittoreschi e fotografati della Calabria.","Il castello, di fondazione angevina (XIV sec.) e poi rimaneggiato dagli Aragonesi nel XV-XVI sec., fu una delle principali difese della costa ionica contro le incursioni turche.","Il sito è inserito all'interno dell'Area Marina Protetta di Capo Rizzuto, istituita nel 1991, la più grande area marina protetta d'Italia per superficie marina (14.733 ha), che custodisce fondali di eccezionale ricchezza biologica con praterie di Posidonia oceanica, coralligeno e una fauna ittica straordinariamente varia."]},{"id":"A011","s":"A","t":"Parco Nazionale della Sila","r":"Calabria","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["Il Parco Nazionale della Sila, istituito nel 2002, si estende per circa 73.000 ettari nell'altopiano silano, che rappresenta la più grande distesa continua di foresta dell'Italia meridionale, condivisa tra le province di Cosenza, Catanzaro e Crotone.","L'altopiano, con un'altitudine media di circa 1.200 m, è spesso definito la \"Piccola Svizzera\" calabrese per via dei suoi paesaggi boschivi, laghi artificiali e clima fresco.","Le grandi foreste di pino laricio (Pinus laricio calabrica), quercia e faggio ricoprono gran parte del territorio: il pino laricio è una specie endemica appenninica e gli esemplari più anziani della Sila hanno superato i 400 anni."]},{"id":"A012","s":"A","t":"Certosa di San Giacomo e Grotta Azzurra","r":"Campania (Isola di Capri)","l":"","u":false,"c":"Sito Religioso","b":["Capri è un'isola del Golfo di Napoli celebre in tutto il mondo per la sua bellezza paesaggistica, le acque turchesi, i Faraglioni e il glamour che la caratterizza da secoli.","La Certosa di San Giacomo, fondata nel 1371 da Giacomo Arcucci, segretario della regina Giovanna I d'Angiò, è il complesso monastico più importante dell'isola e uno dei meglio conservati del meridione: l'architettura gotico-rinascimentale del chiostro grande (XIV sec.) e del chiostro piccolo (XVI sec.) contrasta suggestivamente con la vegetazione mediterranea.","Oggi ospita un liceo classico e il Museo Diefenbach, con le opere del pittore tedesco Karl Wilhelm Diefenbach (1851-1913) che visse a Capri."]},{"id":"A013","s":"A","t":"Costiera Amalfitana: Amalfi, Positano, Ravello","r":"Campania","l":"","u":true,"c":"Paesaggio Culturale","b":["La Costiera Amalfitana è uno dei paesaggi culturali più straordinari d'Italia, riconosciuta Patrimonio UNESCO nel 1997, che si sviluppa per circa 50 km lungo la Penisola Sorrentina meridionale tra i comuni di Positano e Vietri sul Mare (Salerno).","Il paesaggio è caratterizzato da terrazze coltivate a limoni e vigneti che scendono a picco sul mare Tirreno, borghi aggrappati alle falesie, torri saracene di avvistamento e una vegetazione lussureggiante.","La Costa Amalfitana è uno dei luoghi in cui la storia umana e la natura si sono fuse in modo così intenso da creare un paesaggio che il mondo riconosce come simbolo dell'Italia bella."]},{"id":"A014","s":"A","t":"Parco Archeologico di Cuma","r":"Campania","l":"","u":false,"c":"Sito Archeologico","b":["Cuma è la più antica colonia greca dell'Italia continentale e del Mediterraneo occidentale, fondata intorno all'VIII secolo a.C. (tradizionalmente 740-725 a.C.) da coloni calcidesi provenienti dall'isola di Eubea e da Pitecusa (l'attuale Ischia).","Situata sul litorale flegreo a nord di Pozzuoli (Napoli), fu per secoli il principale centro di irradiazione della civiltà greca nel Tirreno: da Cuma i Greci trasmisero l'alfabeto agli Etruschi e ai Latini, e fondarono Napoli (Partenope, poi Neapolis) come subcolonia.","Cuma è la colonia greca che più di ogni altra ha cambiato la storia d'Italia: fu da Cuma che l'alfabeto greco – appreso dai coloni calcidesi dalla tradizione fenicia – fu trasmesso agli Etruschi e ai Latini nel VIII-VII sec. a.C., dando origine agli alfabeti etrusco e latino da cui derivano tutti gli alfabeti europei moderni."]},{"id":"A015","s":"A","t":"Grotte di Pertosa-Auletta","r":"Campania","l":"","u":true,"c":"Parco Naturale / Paesaggio","b":["Le Grotte di Pertosa-Auletta, nel Parco Nazionale del Cilento, sono tra le cavità carsiche più importanti e suggestive dell'Italia meridionale.","Situate nel comune di Pertosa (Salerno), le grotte si aprono sul fianco di una montagna calcarea e sono attraversate da un corso d'acqua sotterraneo, il Negro, che permette un ingresso suggestivo in barca per i primi 200 metri di percorso – un'esperienza quasi unica in Italia.","La formazione carsica è avvenuta nel corso di milioni di anni grazie all'azione dell'acqua sui calcari mesozoici."]},{"id":"A016","s":"A","t":"Parco Archeologico di Ercolano","r":"Campania","l":"","u":true,"c":"Sito Archeologico","b":["Ercolano (Herculaneum) fu una piccola città romana sepolta dall'eruzione del Vesuvio del 79 d.C. che travolse anche Pompei, ma in modo radicalmente diverso: mentre Pompei fu sepolta dalla caduta di cenere e lapilli, Ercolano fu investita da una colata di fango piroclastico che si solidificò in una massa compatta alta fino a 25 metri.","Questo ha conservato materiali organici normalmente deperibili – travi di legno, mobili, tessuti, alimenti, persino papiri – che a Pompei sono andati perduti, rendendo Ercolano un sito di eccezionale valore documentario.","Scoperto nel 1738 durante i lavori di costruzione del Palazzo Reale di Portici, il sito è stato scavato per secoli e presenta oggi una visibilità parziale (gran parte è ancora sotto la moderna Ercolano)."]},{"id":"A017","s":"A","t":"Parco Archeologico di Paestum","r":"Campania","l":"","u":false,"c":"Sito Archeologico","b":["Paestum (l'antica Poseidonia greca) è uno dei siti archeologici più importanti del Mediterraneo e custodisce tre templi dorici tra i meglio conservati al mondo, superiori per stato di conservazione persino a quelli della Grecia.","Fondata intorno al 600 a.C. da coloni sibariti provenienti da Sibari, la città divenne una fiorente polis greca, poi conquistata dai Lucani nel V sec. a.C. (che la ribattezzarono Paistos) e infine colonia romana nel 273 a.C. (Paestum).","Il Tempio di Nettuno (Poseidon, V sec. a.C.) è il più grande e meglio conservato: con i suoi 36 colonne doriche integre, è un capolavoro dell'architettura greca classica."]},{"id":"A018","s":"A","t":"Parco Archeologico di Pompei","r":"Campania","l":"","u":true,"c":"Sito Archeologico","b":["Pompei è il sito archeologico più visitato del mondo e il documento più completo della vita urbana romana di ogni tempo: una città di circa 11.000 abitanti, con le sue strade, le sue case, le sue botteghe, i suoi templi, i suoi teatri e i suoi lupanari, congelata per sempre nell'istante del 24 agosto del 79 d.C. (la data tradizionale, recentemente spostata da alcune scoperte epigrafiche all'autunno, forse al 24 ottobre) quando l'eruzione del Vesuvio la seppellì sotto 4-6 metri di lapilli, pomice e cenere.","Non fu la lava a uccidere i Pompeiani – le colate laviche raggiunsero solo Ercolano – ma la pioggia di pomice (circa 150.000 tonnellate all'ora) che crollò sui tetti e le nubi tossiche di anidride solforosa e biossido di carbonio che soffocarono quanti non erano già fuggiti.","Si stima che il 10-20% della popolazione, circa 2.000 persone, non riuscì a mettersi in salvo: i loro corpi, sepolti nella pomice, lasciarono nella sua solidificazione cavità perfette che gli archeologi, a partire dal 1863 su idea del direttore degli scavi Giuseppe Fiorelli, hanno riempito di gesso per ottenere i celebri calchi – corpi raggomitolati in posizioni di agonia, volti nascosti nelle mani, madri che stringono i figli – che sono tra le immagini più potenti e commoventi dell'intera archeologia mondiale."]},{"id":"A019","s":"A","t":"Parco Nazionale del Vesuvio","r":"Campania","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["Il Vesuvio è il vulcano attivo più famoso d'Europa e uno dei più pericolosi al mondo per la densità della popolazione che vive alle sue pendici (la \"zona rossa\" conta circa 700.000 abitanti).","Istituito come Parco Nazionale nel 1995, si estende per circa 8.482 ettari sulle pendici del vulcano, in provincia di Napoli.","Il cono sommitale (1.281 m) si affaccia sul Golfo di Napoli offrendo un panorama straordinario su tutta la Campania Felix."]},{"id":"A020","s":"A","t":"Centro storico monumentale di Napoli","r":"Campania","l":"","u":true,"c":"Centro Storico / Città","b":["Napoli è una delle città più antiche d'Europa, con una storia di quasi 3.000 anni che dall'insediamento greco di Partenope (VIII sec. a.C.) e Neapolis (V sec. a.C.) giunge a oggi senza soluzione di continuità.","Il centro storico è stato dichiarato Patrimonio UNESCO nel 1995, riconoscendo la straordinaria densità di monumenti, chiese (oltre 400, più che in qualsiasi altra città al mondo), palazzi nobiliari e spazi urbani.","Il decumano inferiore (Spaccanapoli), il decumano maggiore e il cardo antico costituiscono l'impianto ippodameo greco-romano ancora perfettamente leggibile nel tessuto urbano moderno."]},{"id":"A021","s":"A","t":"Monumenti Paleocristiani di Ravenna e Domus dei tappeti di pietra","r":"Emilia-Romagna","l":"","u":true,"c":"Sito Religioso","b":["Ravenna custodisce la più alta concentrazione al mondo di mosaici tardoantichi e paleocristiani, tutelata dal 1996 come Patrimonio UNESCO.","Capitale dell'Impero Romano d'Occidente dal 402 d.C. con Onorio, poi del Regno degli Ostrogoti di Teodorico il Grande (493-526) e infine dell'Esarcato Bizantino (540-751), Ravenna fu per tre secoli uno dei centri politici e culturali più importanti del Mediterraneo.","Ravenna ospita anche il Sepolcro di Dante Alighieri, che morì in città nel 1321."]},{"id":"A022","s":"A","t":"Duomo e Battistero di Parma","r":"Emilia-Romagna","l":"","u":false,"c":"Sito Religioso","b":["Il complesso monumentale del Duomo e del Battistero di Parma costituisce uno degli esempi più significativi dell'architettura romanica padana e ospita alcuni dei più importanti cicli decorativi dell'arte medievale e rinascimentale italiana.","La Cattedrale di Santa Maria Assunta (XI-XII sec.) è un capolavoro del romanico emiliano: la facciata con tre ordini di logge cieche, il tiburio ottagonale e il campanile sono tra i più riusciti esempi dello stile.","All'interno, la cupola affrescata da Antonio Allegri detto il Correggio (1526-1530) con l'\"Assunzione della Vergine\" è un capolavoro del manierismo illusionistico: le figure si avvitano verso il cielo in un turbine di nuvole e angeli che anticipa di un secolo le soluzioni del barocco romano."]},{"id":"A023","s":"A","t":"Complesso monumentale della Pilotta","r":"Emilia-Romagna","l":"","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["Il Palazzo della Pilotta a Parma è un imponente complesso monumentale farnesiano, iniziato nel 1583 per volere di Alessandro Farnese, Duca di Parma, e rimasto incompiuto: la sua mole massiccia in mattoni a faccia vista domina il centro storico della città.","Il nome \"Pilotta\" deriva dal gioco della pelota (pallacorda) che vi si praticava nei cortili interni.","Il palazzo ospita alcune delle istituzioni culturali più importanti dell'Emilia-Romagna."]},{"id":"A024","s":"A","t":"Ferrara, Castello Estense e Delta del Po","r":"Emilia-Romagna","l":"","u":true,"c":"Castello / Palazzo / Sito Monumentale","b":["Ferrara è una delle città rinascimentali più perfette d'Italia, dichiarata Patrimonio UNESCO nel 1995 assieme al suo Delta del Po.","Capitale del Ducato degli Este dal XIII al XVI secolo, la città fu trasformata in una delle prime città pianificate d'Europa dall'Addizione Erculea (1492-1505), voluta da Ercole I d'Este e progettata da Biagio Rossetti: un ampliamento urbanistico razionale con strade dritte e larghe, palazzi nobiliari e giardini che raddoppiò la superficie della città medievale, prefigurando i principi dell'urbanistica moderna.","Il Castello Estense (1385), con le sue quattro torri angolari che si riflettono nel fossato, è il simbolo della città ed è ancora oggi visitabile: i sotterranei con le prigioni (dove morirono Parisina Malatesta e Ugo d'Este, vittime di una tragedia familiare cantata da Byron) si contrappongono ai sontuosi appartamenti ducali affrescati."]},{"id":"A025","s":"A","t":"Duomo e Palazzo Ducale di Modena","r":"Emilia-Romagna","l":"","u":true,"c":"Castello / Palazzo / Sito Monumentale","b":["Il Duomo di Modena, la Torre Ghirlandina e Piazza Grande formano un insieme monumentale dichiarato Patrimonio UNESCO nel 1997, riconosciuto come capolavoro dell'architettura romanica e della scultura medievale.","La Cattedrale di San Geminiano fu iniziata nel 1099 dall'architetto Lanfranco e arricchita da sculture di Wiligelmo, la cui firma appare in un'epigrafe sull'edificio – il primo artista medievale che si sia firmato su un'opera pubblica.","I rilievi di Wiligelmo con Storie della Genesi sulla facciata segnano l'inizio della scultura romanica italiana ed europea; il portale della Pescheria e le Metope (rilievi narrativi sulla navata) sono di rara qualità."]},{"id":"A026","s":"A","t":"Torre degli Asinelli e Torre della Garisenda","r":"Emilia-Romagna","l":"","u":true,"c":"Castello / Palazzo / Sito Monumentale","b":["Le Due Torri di Bologna – la Torre degli Asinelli e la Torre della Garisenda – sono il simbolo per eccellenza della città e il segno più evidente del particolarissimo fenomeno urbanistico delle torri medievali bolognesi: nel XII-XIII secolo Bologna contava oltre 180 torri nobiliari, segno di potere economico e politico delle famiglie; oggi ne restano una ventina, con le Due Torri come le più imponenti.","La Torre degli Asinelli (costruita tra 1109 e 1119), alta 97,2 metri, è la più alta torre medievale ancora visitabile in Italia: i 498 gradini portano a una terrazza panoramica sulla città e sui tetti rossi delle case.","È inclinata di 1,3 gradi rispetto all'asse verticale."]},{"id":"A027","s":"A","t":"Ponte del Diavolo, Tempietto Longobardo e Complesso Episcopale di Cividale del","r":"Friuli-Venezia Giulia","l":"","u":true,"c":"Sito Religioso","b":["Friuli Cividale del Friuli (Udine) è una piccola città di straordinaria importanza storica: fondata da Giulio Cesare come Forum Iulii (da cui il nome Friuli), fu capitale del primo Ducato Longobardo d'Italia (568 d.C.) e poi sede del Patriarcato di Aquileia, uno dei centri di potere ecclesiastico più influenti del Medioevo italiano.","Il centro storico, dichiarato Patrimonio UNESCO nel 2011 nel quadro del sito \"I Longobardi in Italia\", conserva testimonianze eccezionali.","Il Tempietto Longobardo (VIII sec.) è uno dei rarissimi esempi integri di architettura longobarda: la piccola cappella paleocristiana-longobarda custodisce stucchi figurativi di straordinaria qualità (le figure femminili in fila – probabilmente sante – con i capelli mossi dal vento sono un unicum nell'arte altomedievale) e plutei in marmo scolpiti, considerati tra i capolavori dell'arte barbarica."]},{"id":"A028","s":"A","t":"Sacrario di Redipuglia","r":"Friuli-Venezia Giulia","l":"","u":false,"c":"Sito Religioso","b":["Il Sacrario Militare di Redipuglia, nel comune di Fogliano Redipuglia (Gorizia), è il più grande ossario della Prima Guerra Mondiale in Italia e uno dei più grandi al mondo: custodisce i resti di 100.187 caduti italiani, di cui 60.330 identificati.","Costruito tra il 1935 e il 1938 su progetto dell'architetto Giovanni Greppi con le sculture di Giannino Castiglioni, il sacrario si articola in 22 gradoni di pietra bianca che risalgono il Colle di San Elia, ognuno recante la scritta \"PRESENTE\" – a rispondere all'appello eterno dei caduti.","Il luogo è di straordinaria potenza emotiva e simbolica: il fronte dell'Isonzo, nelle immediate vicinanze, fu teatro di undici delle dodici Battaglie dell'Isonzo (1915-1917), alcune tra le più sanguinose della Grande Guerra."]},{"id":"A029","s":"A","t":"Castello di Miramare","r":"Friuli-Venezia Giulia","l":"","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["Il Castello di Miramare sorge su un promontorio roccioso che si protende nel Golfo di Trieste, costruito tra il 1856 e il 1860 per volere dell'Arciduca Massimiliano d'Asburgo, fratello dell'imperatore Francesco Giuseppe d'Austria, che qui visse con la moglie Carlotta del Belgio fino alla partenza per il Messico (1864), dove fu poi fucilato (1867).","Il castello, in stile neogotico-eclettico con elementi neoclassici, è circondato da un parco botanico di 22 ettari che ospita specie rare provenienti da tutto il mondo.","Gli interni, accuratamente conservati con gli arredi originali dell'epoca, riflettono i gusti e le passioni di Massimiliano: la sala da pranzo in stile gotico-veneziano, la biblioteca con la collezione di mappe nautiche, la camera da letto ricavata dalla cabina dell'ammiraglio della sua corvetta, i saloni di rappresentanza con gli affreschi mitologici."]},{"id":"A030","s":"A","t":"Basilica di San Giovanni in Laterano","r":"Lazio – Roma","l":"","u":false,"c":"Sito Religioso","b":["La Basilica di San Giovanni in Laterano è la chiesa madre del cattolicesimo mondiale, la \"mater et caput omnium ecclesiarum urbis et orbis\" (madre e capo di tutte le chiese della città e del mondo), eretta prima ancora della Basilica di San Pietro per volere dell'imperatore Costantino nel 313 d.C.","È la cattedrale del Papa quale vescovo di Roma, sede del trono papale (la Cathedra Romana).","Il Palazzo Lateranense fu la residenza dei papi per mille anni (fino al trasferimento ad Avignone nel 1309) e nel 1929 fu sede della firma dei Patti Lateranensi tra la Santa Sede e il Regno d'Italia."]},{"id":"A031","s":"A","t":"Cattedrale di Anagni","r":"Lazio","l":"","u":false,"c":"Sito Religioso","b":["La Cattedrale di Santa Maria di Anagni è uno dei più straordinari complessi romanici del Lazio ed è definita la \"Cappella Sistina del Medioevo\" per la ricchezza e la qualità degli affreschi che decorano la cripta.","Costruita tra l'XI e il XII secolo, la cattedrale sorge nella \"città dei papi\" – Anagni (Frosinone) dette i natali a quattro pontefici medievali, tra cui Innocenzo III e Bonifacio VIII – e custodisce alcune delle opere pittoriche medievali più importanti d'Italia.","La cripta con le cappelle di San Magno e San Pietro e Paolo è affrescata interamente (circa 1.200 mq di superficie dipinta) con cicli che spaziano dalle scene bibliche a soggetti scientifici e filosofici, con una cultura enciclopedica rara nel Medioevo: astronomi, matematici, figure allegoriche delle arti liberali convivono con scene della vita dei santi, rivelando l'influenza della cultura islamica e della tradizione classica filtrata attraverso i testi arabi."]},{"id":"A032","s":"A","t":"Circo Massimo e Terme di Caracalla","r":"Lazio – Roma","l":"","u":false,"c":"Sito Archeologico","b":["Il Circo Massimo era il più grande impianto sportivo del mondo antico: capace secondo le stime antiche di ospitare tra 150.000 e 250.000 spettatori (anche se le stime moderne parlano di 100.000- 150.000), era dedicato alle corse dei carri (quadrighe) e occupava una valle naturale tra il Palatino e l'Aventino.","Lungo circa 621 m e largo 118 m, con la spina centrale decorata da obelischi, il sito accolse le gare per oltre mille anni, dall'epoca dei Tarquini (VI sec. a.C.) fino al VI sec. d.C.","Oggi l'area è in gran parte visibile come grande spazio verde allungato, con i resti degli spalti parzialmente visibili e un'area espositiva al livello degli scavi."]},{"id":"A033","s":"A","t":"Civita di Bagnoregio","r":"Lazio","l":"","u":true,"c":"Centro Storico / Città","b":["Civita di Bagnoregio è definita \"la città che muore\" per il progressivo ma inesorabile crollo dell'altopiano di tufo su cui sorge, dovuto all'erosione dell'acqua e del vento sui fianchi della rupe.","Fondata dagli Etruschi più di 2.500 anni fa su uno sperone di tufo nel comune di Bagnoregio (Viterbo), la città è accessibile solo da un ponte pedonale di 300 metri che la collega alla terraferma, passando nel vuoto a decine di metri d'altezza.","Il nucleo medievale è rimasto quasi intatto per secoli proprio a causa dell'isolamento: la chiesa di San Donato (XII sec., poi rimaneggiata) con la sua facciata romanica, i palazzi nobiliari con le cantine medievali scavate nel tufo, le strade acciottolate che convergono nella piazza principale, i portali rinascimentali – tutto rivela una cittadina cristallizzata nel tempo."]},{"id":"A034","s":"A","t":"Colosseo","r":"Lazio","l":"","u":true,"c":"Sito Archeologico","b":["Il Colosseo – nome popolare dell'Anfiteatro Flavio – è il monumento più famoso del mondo antico e il simbolo per eccellenza di Roma: una struttura ellittica in travertino, tufo e mattoni che si erge per 48,5 metri di altezza con un perimetro esterno di 527 metri, capace di ospitare tra 50.000 e 73.000 spettatori seduti su gradinate suddivise per ceto sociale.","Fu costruito dalla dinastia flavia tra il 72 d.C. (Vespasiano) e l'80 d.C. (Tito), sul sito del lago artificiale della Domus Aurea neroniana: la scelta del luogo fu un atto politico deliberato, la restituzione al popolo romano di uno spazio che Nerone aveva privatizzato per la propria residenza.","L'inaugurazione nell'80 d.C. fu celebrata con 100 giorni consecutivi di giochi che videro morire nell'arena – secondo le fonti antiche – 9.000 animali selvatici e un numero imprecisato di gladiatori e condannati."]},{"id":"A035","s":"A","t":"Necropoli di Tarquinia","r":"Lazio","l":"","u":true,"c":"Sito Archeologico","b":["La Necropoli di Tarquinia è il sito funerario etrusco più importante del mondo per la quantità e la qualità delle tombe dipinte, dichiarata Patrimonio UNESCO nel 2004 insieme alla Necropoli di Cerveteri.","Tarquinia (Viterbo), l'antica Tarquinii etrusca, fu una delle dodici città della Lega Etrusca e diede a Roma i suoi ultimi tre re (Tarquinio Prisco, Servio Tullio, Tarquinio il Superbo).","La necropoli conta circa 6.000 tombe ipogee scavate nel tufo, di cui oltre 200 con decorazioni pittoriche che costituiscono la più vasta e meglio conservata raccolta di pittura del mondo antico preromano."]},{"id":"A036","s":"A","t":"Necropoli di Cerveteri","r":"Lazio","l":"","u":true,"c":"Sito Archeologico","b":["La Necropoli della Banditaccia di Cerveteri (Roma) è uno dei siti funerari più estesi e meglio conservati del mondo etrusco, dichiarata Patrimonio UNESCO nel 2004 insieme alla Necropoli di Tarquinia.","L'antica Caere (l'attuale Cerveteri) fu una delle più potenti e ricche città dell'Etruria: aveva tre porti sul Tirreno, intratteneva rapporti commerciali con tutto il Mediterraneo e possedeva miniere d'argento.","La sua alleanza con i Cartaginesi nella battaglia di Alalia (535 a.C.) contro i Focesi rivela l'importanza politica della città."]},{"id":"A037","s":"A","t":"Parco Archeologico di Ostia Antica","r":"Lazio – Roma","l":"","u":false,"c":"Sito Archeologico","b":["Ostia Antica è la città portuale di Roma, uno dei più vasti e meglio conservati siti archeologici del mondo antico: con una superficie di oltre 150 ettari di scavi, offre un quadro straordinariamente completo della vita urbana romana dall'epoca repubblicana alla tarda antichità.","Fondata nel IV sec. a.C. come primo porto di Roma sulla foce del Tevere (Ostia deriva da \"ostium\", foce), la città raggiunse il suo apice nel II sec. d.C. con circa 50.000-100.000 abitanti.","A differenza di Pompei (un instantaneo fotografico della vita romana al 79 d.C.), Ostia mostra l'evoluzione urbanistica di secoli: insulae (condomini a più piani tipici dell'edilizia romana), magazzini (horrea) per lo stoccaggio delle merci, terme, taberne, templi, un teatro (II sec. d.C., ancora funzionale), la Piazzale delle Corporazioni con i mosaici dei pavimenti con i simboli delle corporazioni commerciali (mercanti di grano, armatori, banchieri) di tutto il Mediterraneo."]},{"id":"A038","s":"A","t":"Pantheon","r":"Lazio – Roma","l":"","u":false,"c":"Sito Archeologico","b":["Il Pantheon è l'edificio antico meglio conservato al mondo e uno dei capolavori assoluti dell'architettura di ogni tempo.","Costruito dall'imperatore Adriano tra il 118 e il 128 d.C. in sostituzione di un precedente edificio di Agrippa (27 a.C.), di cui conserva l'iscrizione sulla trabeazione (\"M·AGRIPPA·L·F·COS·TERTIVM·FECIT\"), il Pantheon fu un tempio dedicato a tutti gli dèi, poi trasformato in chiesa cristiana nel 609 d.C. (Santa Maria ad Martyres), il che ne ha garantito la sopravvivenza integra.","La cupola in calcestruzzo di 43,3 metri di diametro – uguale all'altezza interna dell'edificio, creando una sfera perfetta inscritta nell'interno – rimase per 1.300 anni la più grande cupola del mondo (superata solo nel 1436 dalla cupola di Brunelleschi a Firenze)."]},{"id":"A039","s":"A","t":"Fori Imperiali","r":"Lazio – Roma","l":"","u":false,"c":"Sito Archeologico","b":["I Fori Imperiali sono un insieme di cinque complessi monumentali costruiti dai più grandi imperatori romani tra il I sec. a.C. e il II sec. d.C. – il Foro di Cesare, il Foro di Augusto, il Tempio della Pace (Foro di Vespasiano), il Foro di Nerva e il Foro di Traiano – che integrano e ampliano il Foro Romano in un sistema urbanistico di grandiosità ineguagliabile.","I lavori di scavo sistematici, iniziati negli anni '30 del Novecento con la realizzazione di Via dei Fori Imperiali, hanno riportato alla luce i resti monumentali.","Il Foro di Traiano (112 d.C.), progettato dall'architetto Apollodoro di Damasco, è il più grande e monumentale: comprendeva la Basilica Ulpia, due biblioteche (latina e greca), il Tempio di Traiano e la Colonna Traiana (113 d.C.), alta 40 m con un fregio a spirale lungo 200 m che narra le due campagne daciche di Traiano in un'epopea figurata di 2.500 personaggi – il più importante documento visivo della storia militare romana."]},{"id":"A040","s":"A","t":"Basilica di San Pietro","r":"Lazio – Roma / Vaticano","l":"","u":false,"c":"Sito Religioso","b":["La Basilica di San Pietro in Vaticano è il più grande tempio cristiano del mondo (lunghezza interna 186 m, larghezza 137 m al transetto, altezza della cupola 132 m) e il centro spirituale del cattolicesimo mondiale.","Sorge sul luogo di sepoltura dell'apostolo Pietro, primo papa della tradizione cattolica, martirizzato a Roma intorno al 64-68 d.C. sotto Nerone.","Costantino eresse qui la prima basilica (IV sec. d.C.) che fu poi demolita e sostituita dall'attuale edificio, costruito tra il 1506 e il 1626."]},{"id":"A041","s":"A","t":"Parco Archeologico dell'Appia Antica","r":"Lazio – Roma","l":"","u":true,"c":"Sito Archeologico","b":["La Via Appia è la \"Regina Viarum\", la madre di tutte le strade romane: costruita dal censore Appio Claudio Cieco nel 312 a.C., collegava Roma a Capua (207 km) e fu poi prolungata fino a Brindisi (564 km totali), diventando la principale arteria di comunicazione con il Sud Italia e il Mediterraneo orientale.","Il Parco Regionale dell'Appia Antica, istituito nel 1988, tutela la porzione extraurbana della via in uscita da Roma, uno degli ambienti più suggestivi e ricchi di storia della Campagna Romana.","Lungo i basoli originali in pietra lavica (alcuni ancora in sito), bordato dai cipressi e dalle rovine di tombe e mausolei, il percorso è un viaggio nel tempo: il Mausoleo di Cecilia Metella (I sec. a.C.), la Villa dei Quintili (considerata la residenza privata più grande di Roma antica), il Circo di Massenzio (IV sec. d.C.) con l'obelisco agonistico, le catacombe cristiane (San Callisto, San Sebastiano, Domitilla) – la più estesa rete di gallerie sotterranee del mondo antico per la sepoltura dei cristiani – e la Villa di Massenzio."]},{"id":"A042","s":"A","t":"Roma barocca monumentale: Fontana di Trevi, Piazza Navona, Vittoriano e Piazza","r":"Lazio – Roma","l":"","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["Venezia Roma barocca e monumentale raccoglie alcune delle icone più riconoscibili della città eterna.","La Fontana di Trevi (1762, Nicola Salvi), la più grande fontana barocca del mondo (26 m di altezza, 49 m di larghezza), segna il punto di arrivo dell'Acquedotto Vergine (19 a.C.) con la scenografia di Nettuno che emerge tra cavalli e scogli, fusa tra architettura e scultura in un trionfo barocco.","La tradizione del lancio della moneta è legata al film \"Tre soldi nella fontana\" (1954)."]},{"id":"A043","s":"A","t":"Cattedrale di San Lorenzo","r":"Liguria – Genova","l":"","u":false,"c":"Sito Religioso","b":["La Cattedrale di San Lorenzo a Genova è il principale edificio religioso della città e uno dei più importanti complessi di architettura romanico- gotica dell'Italia settentrionale.","Consacrata nel 1118, la cattedrale mostra nell'esterno una caratteristica decorazione a bande alternate di marmo bianco di Carrara e ardesia grigio-scura, tipica dello stile romanico genovese, che crea un effetto visivo fortemente geometrico.","La facciata gotica a tre portali (XIV sec.) con le sue rosette, i protiri sorretti da leoni e i rilievi narrativi mostra l'influsso francese nella scultura."]},{"id":"A044","s":"A","t":"Parco delle Cinque Terre","r":"Liguria","l":"","u":true,"c":"Paesaggio Culturale","b":["Le Cinque Terre – Riomaggiore, Manarola, Corniglia, Vernazza e Monterosso al Mare – sono cinque borghi marinari della Riviera di Levante ligure, nella provincia della Spezia, aggrappati a dirupi di roccia che precipitano sul Mare Tirreno.","Dichiarate Patrimonio UNESCO nel 1997, le Cinque Terre sono il risultato di secoli di lavoro umano che ha trasformato i versanti scoscesi in terrazze agricole (fasce) sostenute da muretti a secco: si stima che i muretti di contenimento delle terrazze raggiungano complessivamente 7.000 km – più della Grande Muraglia Cinese.","I borghi, raggiungibili storicamente solo via mare o via sentiero, hanno conservato intatta la loro struttura medievale: le torri di avvistamento genovesi, le case colorate che si specchiano nel mare, i caruggi (vicoli) stretti e ripidi, le chiese in pietra locale."]},{"id":"A045","s":"A","t":"Piazza Vecchia e Santa Maria Maggiore di Bergamo","r":"Lombardia","l":"","u":true,"c":"Centro Storico / Città","b":["Bergamo Alta, la città medievale arroccata sulle colline con le mura veneziane (XVI sec., Patrimonio UNESCO dal 2017), ospita uno dei più suggestivi complessi architettonici d'Italia: il gruppo monumentale della Piazza Vecchia, del Duomo, della Basilica di Santa Maria Maggiore e della Cappella Colleoni, che racchiude secoli di arte lombarda in pochi metri.","La Basilica di Santa Maria Maggiore (iniziata nel 1137) è un capolavoro del romanico lombardo: all'esterno si distingue per i protiri (porticati d'ingresso) scolpiti con leoni stilofori e figure allegoriche, all'interno per i ricchissimi intarsi di marmo e l'arazzo fiammingo del XVI sec.","La Cappella Colleoni, costruita da Bartolomeo Colleoni (condottiero al servizio di Venezia) come mausoleo personale e completata nel 1476, è ritenuta il capolavoro dell'architettura rinascimentale lombarda: la facciata policromatica in marmi bianchi, rossi e neri con le statue e i bassorilievi di Giovanni Antonio Amadeo è di straordinaria ricchezza decorativa."]},{"id":"A046","s":"A","t":"Duomo di Milano","r":"Lombardia","l":"","u":false,"c":"Sito Religioso","b":["Il Duomo di Milano è la più grande cattedrale gotica del mondo per volume (dopo San Pietro) e la terza per superficie, nonché uno dei cantieri più lunghi della storia dell'architettura: iniziato nel 1386 per volere di Gian Galeazzo Visconti, fu completato solo nel 1965 con il posizionamento dell'ultimo portale bronzeo.","I secoli di lavoro hanno creato una stratificazione di stili che va dal gotico milanese alle rifiniture neogotiche ottocentesche napoleoniche.","La struttura esterna è un trionfo del gotico fiammante: 3.400 statue (la più grande collezione di scultura al mondo su un edificio), 135 guglie di marmo bianco di Candoglia che culminano nella Madonnina dorata (1774, 4,16 m, posta a 108,5 m d'altezza), e il bianco scintillante del marmo creano un effetto inimitabile."]},{"id":"A047","s":"A","t":"La Certosa e Castello Visconteo di Pavia","r":"Lombardia","l":"","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["La Certosa di Pavia è uno dei capolavori più completi dell'architettura rinascimentale italiana, fondata nel 1396 da Gian Galeazzo Visconti come mausoleo della dinastia viscontea e completata nel corso del XV-XVI secolo.","La facciata in marmo bianco, rosa e nero di Carrara, aggiunta dal 1473, è un trionfo di decorazione scultorea: medaglioni di imperatori e condottieri, bassorilievi con storie bibliche e classiche, pinnacoli e finestre traforate compongono un'enciclopedia in marmo del Rinascimento lombardo, opera di Cristoforo Mantegazza e Giovanni Antonio Amadeo tra gli altri.","L'interno a navata unica con cappelle laterali conserva affreschi di Bernardino Luini e Bergognone, statue del Perugino e del Cristoforo Romano, e il sontuoso mausoleo di Gian Galeazzo Visconti."]},{"id":"A048","s":"A","t":"Castello Scaligero di Sirmione","r":"Lombardia","l":"","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["Sirmione è un piccolo comune sulla punta di una penisola che si protende nel Lago di Garda, tra i più visitati d'Italia per la bellezza del paesaggio lacustre unita alla presenza di due monumenti di eccezionale importanza.","Il Castello Scaligero (Rocca Scaligera) fu costruito dalla famiglia della Scala (Scaligeri) di Verona nel XIII sec. come fortezza e porto militare: è uno dei rari esempi di castello medievale con porto direttamente incorporato nella struttura, accessibile attraverso un ponte levatoio sull'acqua.","Le merlature ghibelline (a coda di rondine) e le torri rispecchiano l'estetica scaligera."]},{"id":"A049","s":"A","t":"Mantova e Sabbioneta: Palazzo Ducale e città ideale rinascimentale","r":"Lombardia","l":"","u":true,"c":"Castello / Palazzo / Sito Monumentale","b":["Mantova e Sabbioneta sono state dichiarate insieme Patrimonio UNESCO nel 2008 come espressione eccezionale dell'urbanistica rinascimentale.","Mantova, circondata su tre lati dai laghi artificiali del Mincio, fu per due secoli (1328-1707) la capitale del Ducato dei Gonzaga, mecenati tra i più illuminati del Rinascimento italiano.","Il Palazzo Ducale è un complesso di oltre 500 stanze, un labirinto di appartamenti, cortili e giardini che include la Reggia dei Gonzaga, il Castello di San Giorgio (XIV sec.) e la Camera degli Sposi."]},{"id":"A050","s":"A","t":"Teatro alla Scala","r":"Lombardia – Milano","l":"","u":false,"c":"Monumento / Teatro","b":["Il Teatro alla Scala di Milano è il più famoso teatro lirico del mondo, sinonimo di eccellenza nell'opera, nella musica sinfonica e nel balletto.","Costruito tra il 1776 e il 1778 su progetto di Giuseppe Piermarini in stile neoclassico, sorge sul sito della chiesa di Santa Maria della Scala (da cui il nome), demolita per far posto al nuovo teatro.","La facciata neoclassica sobria contrasta con la ricchezza dell'interno: la sala a ferro di cavallo con cinque ordini di palchi e il loggione contiene 2.030 posti."]},{"id":"A051","s":"A","t":"Parco Archeologico di Santa Giulia-Brixia","r":"Lombardia – Brescia","l":"","u":true,"c":"Sito Archeologico","b":["Il complesso museale di Santa Giulia a Brescia ospita uno dei più ricchi e meglio articolati musei d'Italia, dichiarato Patrimonio UNESCO nel 2011 nel quadro del sito \"I Longobardi in Italia\".","Il museo si sviluppa all'interno del Monastero di San Salvatore e Santa Giulia, fondato nel 753 d.C. dalla famiglia longobarda di re Desiderio: l'edificio conserva uno straordinario stratificarsi di architetture dalle età romana a quella longobarda, carolingia, romanica e rinascimentale.","Il cuore del complesso è il Parco Archeologico di Brixia, che include il Capitolium romano (I sec. d.C.), un tempio dedicato alla Triade Capitolina tra i meglio conservati del nord Italia, con avanzi di tre celle con podio e colonne, e il Teatro Romano (I-II sec. d.C.)."]},{"id":"A052","s":"A","t":"Lago di Como, Lago d'Iseo e Franciacorta","r":"Lombardia","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["Il Lago di Como, con i suoi 46 km di lunghezza e profondità massima di 425 m (il più profondo d'Italia), è circondato da una corona di montagne alpine e da ville nobiliari con parchi botanici che ne hanno fatto da secoli la meta preferita dell'aristocrazia e dell'alta borghesia europea.","Villa del Balbianello (XVI-XVIII sec.) a Lenno, con i giardini a terrazza sul lago, e Villa Carlotta (XVIII sec.) a Tremezzo, con la collezione di sculture del Canova e un giardino botanico celebre per le azalee, sono tra le residenze più visitate.","Bellagio, nella posizione sopraelevata sulla punta del triangolo del lago, è ritenuta uno dei borghi più belli d'Italia."]},{"id":"A053","s":"A","t":"Grotte di Frasassi","r":"Marche","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["Le Grotte di Frasassi, nel comune di Genga (Ancona) nella Valle dell'Esino, sono il più grande sistema di grotte carsiche dell'Italia peninsulare visitabile al pubblico.","Scoperte nel 1971 da un gruppo di speleologi del CAI di Ancona, le cavità si aprono nella fianca calcarea del Monte Frasassi e si sviluppano per decine di chilometri.","Il percorso turistico, lungo circa 1,5 km, attraversa ambienti di straordinaria grandiosità: la prima sala scoperta, la Sala della Bolgia, è alta 200 m e avrebbe la capacità di contenere la Cattedrale di Milano."]},{"id":"A054","s":"A","t":"Palazzo Ducale di Urbino","r":"Marche","l":"","u":true,"c":"Castello / Palazzo / Sito Monumentale","b":["Il Palazzo Ducale di Urbino, dichiarato Patrimonio UNESCO nel 1998 come parte del \"Centro Storico di Urbino\", è considerato il più perfetto esempio di architettura rinascimentale italiana e uno dei centri della cultura umanistica europea del Quattrocento.","Costruito tra il 1450 e il 1472 da Federico da Montefeltro, duca di Urbino, su progetto di Luciano Laurana e Francesco di Giorgio Martino, il palazzo sorge sulla vetta di una collina nelle Marche e domina il paesaggio circostante con la sua facciata a torrette cilindriche e logge sovrapposte.","Il palazzo ospita la Galleria Nazionale delle Marche, che conserva alcune delle opere più importanti del Rinascimento: \"La Città Ideale\" (anonimo, forse Piero della Francesca o Luciano Laurana), con la rappresentazione di una piazza perfettamente simmetrica in prospettiva; la \"Flagellazione di Cristo\" di Piero della Francesca, opera enigmatica e matematicamente costruita; la \"Madonna di Senigallia\" sempre del Piero; il ritratto di Federico da Montefeltro di Pedro Berruguete."]},{"id":"A055","s":"A","t":"Parco Nazionale dei Monti Sibillini","r":"Marche / Umbria","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["Il Parco Nazionale dei Monti Sibillini, istituito nel 1993, si estende per circa 70.000 ettari tra le Marche e l'Umbria, con vette che superano i 2.400 m (il Monte Vettore è il punto più alto a 2.476 m).","Il massiccio calcareo ha un'importanza geologica e paesaggistica eccezionale: le forme arrotondate delle vette, i circhi glaciali e i piani carsici – in primis il Piano Grande di Castelluccio di Norcia, famoso per la fioritura primaverile delle lenticchie selvatiche e dei papaveri (la \"Fiorita\") che crea un mosaico di colori spettacolare – sono tra i paesaggi più fotografati dell'Appennino.","I Monti Sibillini devono il nome alla Sibilla Appenninica, una figura leggendaria femminile che si diceva abitasse una grotta sulle alture del monte omonimo (2.173 m): la sua fama attirò nel Medioevo pellegrini, maghi e cavalieri in cerca di incantesimi e oro, creando un ciclo di leggende che influenzò la letteratura europea (Ariosto, Tasso, il romanzo \"Andreas Capellanus\")."]},{"id":"A056","s":"A","t":"Centro storico di Ascoli Piceno","r":"Marche","l":"","u":false,"c":"Centro Storico / Città","b":["Ascoli Piceno è uno dei centri storici medievali più compatti e meglio conservati d'Italia, costruito quasi interamente in travertino locale (la \"pietra di Ascoli\"), un calcare chiaro che conferisce alla città un aspetto luminoso e monumentale.","Capitale del Piceno preromano e poi municipio romano, la città mantiene il tracciato ortogonale romano nella trama delle strade, con il cardo e il decumano principali ancora riconoscibili in Via del Trivio e Corso Mazzini.","Piazza del Popolo, con i suoi portici, il Palazzo dei Capitani (XIII-XVI sec.) e la chiesa di San Francesco (XIII-XIV sec.) con l'attiguo Loggiato dei Mercanti, è considerata una delle piazze più belle d'Italia."]},{"id":"A057","s":"A","t":"Rocca di Gradara","r":"Marche","l":"","u":true,"c":"Castello / Palazzo / Sito Monumentale","b":["La Rocca di Gradara è una delle rocche medievali più scenografiche d'Italia, adagiata su un colle nel pesarese con vista sul mare Adriatico.","Costruita dai Gradara nel XIII sec. e poi passata ai Malatesta e agli Sforza, la rocca è inscindibilmente legata alla tragica storia d'amore di Paolo Malatesta e Francesca da Rimini, che il Dante immortalò nel V Canto dell'Inferno della Divina Commedia come esempio dell'adulterio punito nel cerchio dei lussuriosi.","La tradizione vuole che il marito di Francesca, Gianciotto Malatesta, uccise i due amanti all'interno della rocca nel 1285."]},{"id":"A058","s":"A","t":"Santuario della Santa Casa di Loreto","r":"Marche","l":"","u":false,"c":"Sito Religioso","b":["Il Santuario della Santa Casa di Loreto è uno dei principali luoghi di pellegrinaggio del mondo cattolico, visitato ogni anno da milioni di fedeli.","Al centro della basilica si trova la Santa Casa, la casa in mattoni che la tradizione identifica con l'abitazione nazaretana di Maria dove avvenne l'Annunciazione, portata secondo la leggenda dagli angeli dalla Palestina fino a Loreto (1294): tre diverse \"atterrissaggi\" (Tersatto in Croazia, Recanati, Loreto) segnarono il percorso miracoloso.","La spiegazione storica più credibile ipotizza il trasporto fisico della struttura da parte della famiglia Angeli di Epiro alla fine del XIII sec., quando la crociata stava perdendo i luoghi santi."]},{"id":"A059","s":"A","t":"Riserva Naturale delle Alpi Marittime","r":"Piemonte","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["La Riserva Naturale delle Alpi Marittime (oggi Parco Naturale delle Alpi Marittime) si trova nelle valli Gesso, Vermenagna e Pesio in provincia di Cuneo, al confine con il Parc National du Mercantour francese con cui forma il Parco Europeo Alpi Marittime-Mercantour.","Con i suoi 28.000 ettari di territorio alpino che arrivano fino ai 3.143 m del monte Argentera, la riserva è uno dei luoghi di maggior biodiversità delle Alpi: ospita la più alta densità di stambecchi delle Alpi (reintrodotti nel 1920), camosci, lupi, volpi, aquile e una flora di eccezionale ricchezza.","Le Alpi Marittime si distinguono per il particolare contatto tra flora alpina e mediterranea: la vicinanza al mare (a circa 50 km in linea d'aria) e la bassa quota dei valichi creano un microclima unico che permette la coesistenza di specie tipicamente alpine con specie mediterranee rare."]},{"id":"A060","s":"A","t":"La Valle di Susa e l'Anfiteatro Romano di Susa","r":"Piemonte","l":"","u":false,"c":"Sito Archeologico","b":["La Valle di Susa è la principale via di comunicazione delle Alpi Occidentali tra Italia e Francia, percorsa fin dall'antichità da eserciti, pellegrini e mercanti.","L'antica Segusio (Susa) fu capitale del regno di Cozio, re locale che si accordò con Augusto nel 8 a.C. e in suo onore eresse l'Arco di Augusto, uno dei monumenti romani meglio conservati dell'Italia settentrionale.","Le mura romane e il complesso delle terme, parzialmente visibili, testimoniano l'importanza della città nella romanizzazione delle Alpi."]},{"id":"A061","s":"A","t":"La Venaria Reale","r":"Piemonte","l":"","u":true,"c":"Castello / Palazzo / Sito Monumentale","b":["La Venaria Reale, vicino a Torino, è una delle residenze reali sabaude più sontuose d'Europa, dichiarata insieme alle altre Residenze dei Savoia Patrimonio UNESCO nel 1997.","Costruita dal 1658 come residenza di caccia di Carlo Emanuele II di Savoia su progetto di Amedeo di Castellamonte, fu ampliata e trasformata nel corso del XVIII sec. da Filippo Juvara (dal 1716) in una delle più grandiose regge barocche d'Europa, che rivaleggiava per magnificenza con Versailles.","Dopo secoli di abbandono e utilizzo militare, la Venaria è stata oggetto del più grande progetto di restauro d'Europa degli anni 2000, costato circa 200 milioni di euro, e riaperta al pubblico nel 2007."]},{"id":"A062","s":"A","t":"Langhe-Roero e Monferrato","r":"Piemonte","l":"","u":true,"c":"Paesaggio Culturale","b":["Il paesaggio vitivinicolo del Piemonte – Langhe, Roero e Monferrato – è stato dichiarato Patrimonio UNESCO nel 2014 come \"Paesaggi vitivinicoli del Piemonte: Langhe-Monferrato e Astigiano\".","L'area, estesa tra le province di Cuneo, Asti e Alessandria nelle colline piemontesi, è la patria dei vini rossi più pregiati d'Italia: il Barolo (il \"re dei vini\"), il Barbaresco, il Barbera d'Asti, il Moscato d'Asti e il Dolcetto sono tra le DOCG più celebrate al mondo.","Il paesaggio ha un fascino straordinario in ogni stagione: le vigne disegnano geometrie sui pendii collinari, i borghi medievali coronano le alture (Alba, Barolo, La Morra, Serralunga d'Alba, Neive, Barbaresco), le cantine (alcune in castelli storici) aprono le loro porte per degustazioni."]},{"id":"A063","s":"A","t":"Sacra di San Michele","r":"Piemonte","l":"","u":false,"c":"Sito Religioso","b":["La Sacra di San Michele è un'abbazia benedettina arroccata su uno sperone di roccia del Piemonte a 962 m sul livello del mare, nel comune di Sant'Ambrogio di Torino (Torino), affacciata sulla Valle di Susa con una visuale spettacolare sulle Alpi e sulla pianura piemontese.","Fondata intorno all'anno 983, la Sacra fu uno dei complessi monastici più importanti e frequentati del Medioevo occidentale: punto di transito sul cammino verso Roma per i pellegrini nordeuropei e sede di una comunità benedettina fiorente che ospitò fino a mille monaci.","Il complesso è costruito sull'apice della rupe con un'ingegnosità architettonica straordinaria: lo Scalone dei Morti (XII sec.), la scala di accesso di 154 gradini scavata nella roccia con ai lati i sepolcri dei monaci, porta al portale zoomorfo con lo Zodiaco (XII sec.) e alla chiesa romanica superiore (XI-XII sec.) con la cripta affrescata."]},{"id":"A064","s":"A","t":"Basilica di San Nicola e Castello Normanno-Svevo-Angioino di Bari","r":"Puglia","l":"","u":false,"c":"Museo","b":["Bari è il capoluogo della Puglia e una delle principali città del Mezzogiorno italiano: il suo centro storico, noto come \"Bari Vecchia\", è un labirinto di vicoli stretti su una penisola protesa nell'Adriatico, dominato dalla Basilica di San Nicola e dal Castello.","La Basilica di San Nicola (1087-1197) è uno dei capolavori del romanico pugliese e uno dei principali luoghi di pellegrinaggio d'Italia e d'Europa: costruita per custodire le reliquie di San Nicola (il Babbo Natale della tradizione occidentale) trafugate dai marinai baresi a Myra in Licia (Asia Minore) nel 1087, è meta di pellegrinaggi di cattolici e ortodossi.","La facciata tripartita con il triforio centrale, i campanili ai lati e i portali con figure zoomorfe è il modello di riferimento del romanico pugliese, imitato da decine di chiese nella regione."]},{"id":"A065","s":"A","t":"Basilica di Santa Croce e Palazzo dei Celestini di Lecce","r":"Puglia","l":"","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["Lecce è definita la \"Firenze del Barocco\" o, con un accento di ironia campanilistico, \"la Firenze del Sud\": la sua architettura barocca, sviluppata nel XVII-XVIII sec. con la pietra leccese (una calcarenite dorata particolarmente lavorabile), è di una ricchezza decorativa senza pari in Italia e in Europa.","La Basilica di Santa Croce (1549-1695) è il manifesto del barocco leccese: la facciata, un trionfo di colonne, pinnacoli, rosoni, telamoni, cariatidi, ghirlande di frutta e figure zoomorfe sovrapposti su due ordini, è definita da Montaigne \"un sogno fatto in pietra\".","Il Palazzo dei Celestini, attiguo alla basilica, è oggi sede del Palazzo della Provincia: la facciata superiore ricalca lo stile di Santa Croce."]},{"id":"A066","s":"A","t":"Castello Aragonese di Otranto","r":"Puglia","l":"","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["Otranto è il comune più orientale d'Italia, sul tacco dello stivale pugliese, e uno dei luoghi di maggiore interesse storico e culturale della Puglia meridionale.","Il Castello Aragonese (XV-XVI sec.), costruito dagli Aragonesi per rafforzare le difese costiere contro le incursioni turche, è una delle fortezze meglio conservate del Sud Italia: la pianta pentagonale con bastioni a orecchie, il fossato e le scarpature basse e inclinate riflettono le nuove tecniche militari del tardo Quattrocento in risposta all'artiglieria.","La Cattedrale di Santa Maria Annunziata (XI-XII sec.) custodisce il più grande mosaico pavimentale romanico del mondo (800 mq, 1163-1165), opera del monaco Pantaleone: l'albero della vita con i suoi rami ramificati suddivide lo spazio in più di 200 scene tratte dalla Bibbia, dalla storia antica, dal ciclo arturiano e dal bestiario medievale, rivelando una cultura enciclopedica e cosmopolita."]},{"id":"A067","s":"A","t":"Cattedrale di Trani","r":"Puglia","l":"","u":false,"c":"Sito Religioso","b":["La Cattedrale di San Nicola Pellegrino a Trani è considerata il capolavoro del romanico pugliese e uno dei più straordinari edifici medievali d'Europa.","Costruita a partire dal 1093 direttamente sul mare Adriatico, la cattedrale si specchia nelle acque del porto creando uno dei panorami più romantici del Mezzogiorno.","La dedicazione a San Nicola Pellegrino, un giovane greco morto a Trani nel 1094 e canonizzato, è legata alla storia locale della città che era allora un importante porto crociato."]},{"id":"A068","s":"A","t":"Santuario di San Michele Arcangelo a Monte Sant'Angelo","r":"Puglia","l":"","u":true,"c":"Sito Religioso","b":["Il Santuario di San Michele Arcangelo a Monte Sant'Angelo, sul Gargano (Foggia), è uno dei luoghi di culto più antichi d'Europa e uno dei più importanti santuari cattolici del mondo.","Dichiarato Patrimonio UNESCO nel 2011 nel quadro del sito seriale \"I Longobardi in Italia\", il santuario custodisce la grotta naturale in cui, secondo la tradizione, l'arcangelo Michele apparve al vescovo di Siponto nel 490, 492 e 493 d.C. – la prima apparizione documentata del culto micaelico in Occidente.","La grotta non fu mai consacrata dall'uomo perché ritenuta già consacrata dall'arcangelo stesso, un unicum nella storia cristiana."]},{"id":"A069","s":"A","t":"Santuario di San Pio da Pietrelcina a San Giovanni Rotondo","r":"Puglia","l":"","u":false,"c":"Sito Religioso","b":["Il Santuario di San Pio da Pietrelcina a San Giovanni Rotondo (Foggia), sul promontorio del Gargano, è il secondo luogo di pellegrinaggio più visitato del mondo dopo San Pietro in Vaticano, con circa 7-8 milioni di pellegrini l'anno.","Padre Pio da Pietrelcina (Francesco Forgione, 1887-1968), frate cappuccino vissuto a San Giovanni Rotondo per oltre cinquant'anni, è tra le figure religiose più amate del cattolicesimo contemporaneo: canonizzato nel 2002 da Giovanni Paolo II, era noto per le stimmate (che portò per 50 anni), per le bilocazioni e per i carismi taumaturgici.","Il complesso santuariale si articola in tre edifici: la chiesa antica di Santa Maria delle Grazie (XVI sec.) dove Padre Pio celebrò la messa, la chiesa \"nuova\" costruita negli anni '50-'60, e la grande Cripta con la tomba del santo."]},{"id":"A070","s":"A","t":"Tomba dei Giganti di Coddu Vecchiu e Complesso nuragico La Prisgiona","r":"Sardegna","l":"","u":false,"c":"Sito Archeologico","b":["L'area di Arzachena, in Gallura (Sassari), custodisce una delle più alte concentrazioni di monumenti preistorici della Sardegna, che insieme compongono un paesaggio culturale di eccezionale valore.","La Tomba dei Giganti di Coddu Vecchiu è uno dei più imponenti monumenti funerari preistorici sardi: la tomba di giganti (3500-1300 a.C.) è un sepolcro collettivo a forma di barca capovolta con una grande stele \"a esedra\" frontale alta 5,97 m, decorata con una falsa porta dal preciso significato simbolico di passaggio tra il mondo dei vivi e dei morti.","Il Complesso Nuragico de La Prisgiona è uno dei nuraghi più importanti della Gallura: il nuraghe complesso con torre centrale e tre torri minori collegate da cortine murarie è datato alla prima Età del Bronzo (1600-1300 a.C.)."]},{"id":"A071","s":"A","t":"Domus de janas e siti megalitici della Sardegna","r":"Sardegna","l":"","u":false,"c":"Sito Archeologico","b":["Le Domus de Janas (in sardo: \"Case delle fate\" o \"Case delle streghe\") sono sepolcri ipogeici preistorici scavati nella roccia calcarea e trachitica, diffusi in tutta la Sardegna e databili principalmente al Neolitico recente e al Calcolitico (4000-2400 a.C.).","Il nome sardo-popolare le associava alle fate (Janas), esseri femminili della mitologia locale.","La necropoli di Anghelu Ruju, presso Alghero (Sassari), conta 38 domus de janas disposte in due gruppi: alcune conservano incisioni rupestri con protomi taurine e simboli astrali di grande interesse iconografico."]},{"id":"A072","s":"A","t":"Santuari nuragici: Santa Cristina e Santa Vittoria","r":"Sardegna","l":"","u":false,"c":"Sito Archeologico","b":["I santuari nuragici sono complessi cultuali dell'Età del Bronzo (1600-900 a.C.) e del Ferro (900-500 a.C.) tipici della civiltà nuragica sarda, incentrati su pozzi sacri o fonti sacre la cui architettura riflette una profonda conoscenza astronomica.","Il Pozzo Sacro di Santa Cristina a Paulilatino (Oristano) è il più perfetto e meglio conservato dei pozzi sacri sardi: la tholos sottostante (la camera dove si raccoglie l'acqua), il vano di accesso trapezoidale e l'atrio vestibolare formano un insieme di geometria rigorosa in basalto scuro.","Agli equinozi e ai solstizi, la luce solare penetra verticalmente nell'imbuto fino all'acqua del pozzo, un fenomeno astronomico che rivela una precisa correlazione tra architettura e cicli celesti."]},{"id":"A073","s":"A","t":"Museo di Cabras e area dei Giganti di Monte Prama","r":"Sardegna","l":"","u":false,"c":"Museo","b":["I Giganti di Monte Prama sono statue in pietra calcarea di guerrieri, arcieri e pugili di circa 2-2,50 m di altezza, scoperti dal 1974 in poi nella necropoli di Mont'e Prama presso Cabras (Oristano) e databili all'VIII-VII sec. a.C. (periodo nuragico finale/primo Ferro).","Si tratta delle statue antropomorfe più antiche d'Europa per dimensioni – più grandi delle coeve statue greche arcaiche – e rappresentano la più eccezionale scoperta archeologica dell'Italia degli ultimi decenni: le prime statue a figura intera del Mediterraneo preromano rinvenute in contesto funerario.","Restaurate dopo lunghi lavori, le statue (già recuperate alcune decine, con nuovi scavi in corso) sono conservate nel Museo Civico \"Giovanni Marongiu\" di Cabras, che è diventato la destinazione culturale più importante della Sardegna centro-occidentale."]},{"id":"A074","s":"A","t":"Siti fenicio-punici e romani della Sardegna: Tharros, Nora e Monte Sirai","r":"Sardegna","l":"","u":false,"c":"Sito Archeologico","b":["La Sardegna ospita alcune delle più importanti testimonianze della civiltà fenicio-punica nel Mediterraneo occidentale: i Fenici fondarono numerosi insediamenti costieri nell'isola a partire dall'VIII sec. a.C. che divennero poi centri punici (cartaginesi) dopo il V sec. a.C. e infine romani dopo il 238 a.C.","Tharros, sulla penisola del Sinis presso Cabras (Oristano), fu una delle principali città puniche e poi romane della Sardegna: i resti delle terme romane (con colonne in piedi), del tempio punico, del tophet (santuario dove si eseguivano sacrifici rituali), degli acquedotti e dei mosaici emergono direttamente sul promontorio basaltico con vista sul Golfo di Oristano, creando uno dei paesaggi archeologici più spettacolari d'Italia.","Nora, sulla penisola di Capo di Pula (Cagliari), è la più antica città dell'isola e mostra analogamente la sovrapposizione di strati fenici, punici e romani, con terme, mosaici, un teatro romano ancora usato d'estate e un tophet."]},{"id":"A075","s":"A","t":"Duomo e Fontana dell'Elefante di Catania","r":"Sicilia","l":"","u":true,"c":"Sito Religioso","b":["Catania è la seconda città della Sicilia, posta ai piedi dell'Etna e costruita per gran parte in pietra lavica nera che le conferisce un colore cupo e maestoso unico in Italia.","Distrutta quasi completamente dall'eruzione del 1669 e poi dal devastante terremoto del 1693, la città fu integralmente ricostruita in stile barocco siciliano, e il centro storico è dichiarato Patrimonio UNESCO nel 2002 nel quadro delle \"Città tardo barocche della Val di Noto\".","La Fontana dell'Elefante (1736, Giovan Battista Vaccarini) in Piazza del Duomo è il simbolo della città: un elefante in basalto lavico di età romana (II sec. d.C.) sormontato da un obelisco egizio supporta una coppa d'acqua."]},{"id":"A076","s":"A","t":"Centro storico di Modica","r":"Sicilia","l":"","u":true,"c":"Centro Storico / Città","b":["Modica, in provincia di Ragusa, è una delle \"Città tardo barocche della Val di Noto\" dichiarate Patrimonio UNESCO nel 2002.","Distrutta dal terremoto del 1693, fu ricostruita nel barocco siciliano più elaborato ed è considerata una delle più belle città barocche d'Europa.","La città si sviluppa in modo spettacolare su due valli (Modica Alta e Modica Bassa) collegate da scale e vicoli che la rendono scenograficamente unica: dall'alto, il panorama sui tetti e le chiese barocche scalate sulle colline è di straordinaria bellezza."]},{"id":"A077","s":"A","t":"Parco Archeologico della Neapolis e Necropoli di Siracusa","r":"Sicilia","l":"","u":true,"c":"Sito Archeologico","b":["Siracusa fu la più potente città greca d'Occidente: fondata nel 734 a.C. da coloni corinzi, raggiunse un'estensione pari a quella di Atene e resistette agli Ateniesi nella disastrosa Spedizione in Sicilia del 415-413 a.C. (l'unica volta in cui Atene perse un'intera armata).","Il matematico e inventore Archimede (287-212 a.C.) vi nacque e vi morì; Platone vi fece tre viaggi nel tentativo di realizzare il governo dei filosofi; Cicerone, questore in Sicilia nel 73 a.C., la descrisse come \"la più bella città del mondo\".","Il Parco Archeologico della Neapolis ospita il Teatro Greco (V sec. a.C., uno dei più grandi del mondo antico con 15.000 posti, oggi utilizzato per il Festival del Teatro Greco) e l'Orecchio di Dionisio, una grande cava di pietra (latomia) con un'apertura a forma di orecchio alta 23 m, che per la sua eccezionale acustica e la presunta capacità di amplificare le voci fu associata al tiranno Dionisio il Vecchio."]},{"id":"A078","s":"A","t":"Tempio e Teatro di Segesta","r":"Sicilia","l":"","u":false,"c":"Sito Archeologico","b":["Segesta è uno dei siti archeologici più evocativi della Sicilia e del Mediterraneo: le rovine della città elima (un popolo di probabile origine anatolica o minoica, né greco né fenicio) sorgono in una posizione solitaria sulle colline del Trapanese, in un paesaggio di rara bellezza che amplifica l'impatto emotivo dei monumenti.","La città fu uno degli alleati degli Ateniesi nella rovinosa Spedizione in Sicilia del 415 a.C. e in perenne conflitto con Selinunte.","Il Tempio Dorico (V sec. a.C., forse 430-420 a.C.) è uno dei più perfetti e integri templi greci esistenti nel mondo, con 36 colonne doriche ancora in piedi e la trabeazione completa, nonostante non abbia mai avuto le pareti esterne: la sua incompletezza rimane un enigma (forse un progetto interrotto per la guerra)."]},{"id":"A079","s":"A","t":"Parco Archeologico di Selinunte","r":"Sicilia","l":"","u":false,"c":"Sito Archeologico","b":["Selinunte (Selinus) fu la più occidentale delle colonie greche di Sicilia, fondata nel 628 a.C. da coloni megaresi, e raggiunse un'importanza tale da costruire alcuni dei più grandi templi del mondo greco.","Distrutta dai Cartaginesi nel 409 a.C. dopo un assedio di nove giorni con 100.000 soldati (secondo Diodoro Siculo), la città non fu mai completamente ricostruita e i suoi immensi resti sono rimasti nel silenzio delle colline e della costa per millenni.","Il Parco Archeologico di Selinunte conserva i resti di sette templi, indicati con lettere dell'alfabeto: il Tempio E (V sec. a.C.), parzialmente ricostruito, è il più integro; il Tempio G (560-480 a.C.), di cui rimangono enormi blocchi abbattuti dal terremoto medievale, fu uno dei più grandi templi antichi mai costruiti (122 x 63 m)."]},{"id":"A080","s":"A","t":"Teatro Greco di Taormina","r":"Sicilia","l":"","u":false,"c":"Monumento / Teatro","b":["Il Teatro Greco di Taormina è uno dei monumenti più celebri e visitati di tutta Italia, e uno dei luoghi più fotografati del mondo: la sua posizione spettacolare, a 206 m sul livello del mare con il palcoscenico aperto verso il golfo di Naxos e con l'Etna sullo sfondo, crea una scenografia naturale senza eguali.","Il teatro fu costruito dai Greci nel III sec. a.C. e fu poi profondamente rimaneggiato dai Romani che lo trasformarono in arena per gladiatori (tamponando il colonnato della scena e allargando la cavea).","Con un diametro di 109 m (il secondo più grande teatro greco della Sicilia dopo Siracusa), il teatro conserva parzialmente le gradinate, l'orchestra circolare e i resti imponenti della scena con colonne binate su due ordini."]},{"id":"A081","s":"A","t":"Basilica di Santa Maria Novella","r":"Toscana – Firenze","l":"","u":false,"c":"Sito Religioso","b":["La Basilica di Santa Maria Novella a Firenze è una delle chiese più importanti d'Italia e uno dei massimi esempi di architettura gotico-rinascimentale del Trecento e Quattrocento.","Costruita dai frati Domenicani a partire dal 1246, divenne il luogo di culto prediletto dalla ricca borghesia fiorentina: le cappelle private delle grandi famiglie (Strozzi, Bardi, Rucellai, Tornabuoni) sono decorate da cicli di affreschi di straordinaria qualità.","La facciata è un capolavoro di architettura rinascimentale: la parte inferiore romanico-gotica è stata completata nel 1470 da Leon Battista Alberti su commissione di Giovanni Rucellai, che vi appose la scritta del suo cognome."]},{"id":"A082","s":"A","t":"Duomo e Battistero di Firenze","r":"Toscana – Firenze","l":"","u":false,"c":"Sito Religioso","b":["Il complesso di Santa Maria del Fiore (il Duomo di Firenze), il Campanile di Giotto e il Battistero di San Giovanni è l'insieme monumentale più celebre di Firenze e uno dei più visitati al mondo.","La Cattedrale di Santa Maria del Fiore fu iniziata nel 1296 da Arnolfo di Cambio e portata avanti nei secoli successivi; il capolavoro assoluto è la Cupola di Filippo Brunelleschi (1420-1436): ottagonale, alta 116 m, con il diametro di 45 m, fu costruita senza centine lignee (impossibili per le dimensioni) usando una tecnica innovativa con mattoni disposti a lisca di pesce che si reggevano da soli durante la costruzione.","Rimase per quasi 600 anni la più grande cupola del mondo."]},{"id":"A083","s":"A","t":"Parco Naturale Regionale delle Alpi Apuane","r":"Toscana","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["Le Alpi Apuane sono un massiccio montuoso che si erge bruscamente dalla costa toscana tra Lucca e Massa-Carrara, con vette che sfiorano i 2.000 metri (il Monte Pisanino è il punto più alto a 1.945 m), riconoscibili per la loro bianchezza dovuta agli affioramenti di marmo che le punteggiano.","Istituito come Parco Regionale nel 1985, il massiccio ospita uno dei paesaggi più peculiari d'Italia: la giustapposizione di alte vette alpestri con il mare visibile a pochi km di distanza, le cave di marmo che scavano le montagne e la folta vegetazione che le ricopre.","Il marmo di Carrara, estratto ininterrottamente da oltre 2.000 anni, è il più celebre al mondo: bianchissimo, compatto e lavorabile, è stato usato da Michelangelo (che veniva di persona a scegliere i blocchi per le sue sculture), Bernini, Canova e tutti i grandi scultori dall'antichità a oggi."]},{"id":"A084","s":"A","t":"Riserva Naturale della Maremma","r":"Toscana","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["La Riserva Naturale della Maremma (Parco Naturale della Maremma), istituita nel 1975, si estende per circa 9.000 ettari lungo la costa tirrenica grossetana tra Principina a Mare e Talamone, includendo la penisola del Monte dell'Uccellina con le sue torri costiere spagnole del XVI sec. e una fascia di macchia mediterranea, pineta, praterie e zone umide di eccezionale valore naturalistico.","È uno dei parchi più beni conservati d'Italia e uno degli ultimi tratti di costa tirrenica ancora integri.","Il paesaggio è dominato dai Monti dell'Uccellina (417 m), colline boscate che scendono direttamente sul mare formando scogliere e calette di straordinaria bellezza."]},{"id":"A085","s":"A","t":"Santuario della Verna e Monastero di Camaldoli","r":"Toscana","l":"","u":false,"c":"Sito Religioso","b":["Il Santuario della Verna, nel Casentino (Arezzo), è uno dei luoghi più sacri del francescanesimo: su questo aspro sperone di arenaria a 1.283 m, donato nel 1213 dal conte Orlando Cattani a San Francesco d'Assisi, il santo ricevette le Stimmate nel settembre del 1224 – la prima stigmatizzazione documentata nella storia del cattolicesimo.","Il Santuario, sviluppato nei secoli attorno alla Cappella delle Stimmate e alla Basilica Maggiore, conserva una straordinaria raccolta di terrecotte robbiane (della bottega della famiglia Della Robbia) tra cui la \"Annunciazione\" e la \"Natività\" di Andrea della Robbia.","La foresta di faggi e abeti che circonda la Verna è un'area naturale protetta."]},{"id":"A086","s":"A","t":"Area Archeologica e Museo Archeologico Nazionale di Cosa","r":"Toscana","l":"","u":false,"c":"Sito Archeologico","b":["Cosa (Ansedonia) fu una colonia romana fondata nel 273 a.C. sulla costa tirrenica toscana, nell'attuale comune di Orbetello (Grosseto): una delle prime coloniae maritimae della storia di Roma, posta su un promontorio rocciosa a controllo del tratto di mare tra l'Etruria e la Campania.","La città fu abbandonata nel II sec. d.C. e non fu mai rioccupata, il che ne ha garantito una conservazione eccezionale: le mura in opera poligonale (poligons) di oltre 1,5 km di lunghezza con 18 torri sono tra i sistemi di cinta muraria romana meglio conservati d'Italia.","Il Parco Archeologico di Cosa conserva i resti dell'Arx (l'acropoli con i Capitolium e il Tempio D), del Foro con la Curia e la Comitia, delle insulae residenziali e del porto (il Portus Cosanus)."]},{"id":"A087","s":"A","t":"Città Etrusca di Chiusi","r":"Toscana","l":"","u":false,"c":"Sito Archeologico","b":["Chiusi (Siena) fu nell'antichità una delle città più potenti della Lega Etrusca delle dodici città: l'antica Clevsin etrusca, poi Clusium romana, ebbe il suo apice tra il VII e il V sec. a.C.","Il leggendario re Lars Porsenna, che secondo la tradizione romana assediò Roma dopo la cacciata dei Tarquini (508 a.C.), era re di Chiusi; il suo mitico mausoleo, descritto da Plinio il Vecchio come un labirinto sotterraneo coronato da un edificio piramidale, non è mai stato trovato ma la sua leggenda alimenta l'immaginario della città.","Il Museo Nazionale Etrusco di Chiusi è uno dei più importanti musei etruschi d'Italia: conserva urne cinerarie alabastrine, sarcofagi, buccheri (ceramica etrusca nera lucida), klinai (letti funerari), canopi chiusini (urne antropomorfe con coperchio a testa umana)."]},{"id":"A088","s":"A","t":"Piazza del Campo e Duomo di Siena","r":"Toscana","l":"","u":true,"c":"Sito Religioso","b":["Siena è una delle città medievali meglio conservate d'Italia, dichiarata Patrimonio UNESCO nel 1995, il cui centro storico è rimasto quasi immutato dall'epoca medievale grazie alla sconfitta nella battaglia di Colle Val d'Elsa (1269) che impedì la sua espansione.","Piazza del Campo è la piazza medievale più bella d'Italia e una delle più grandi d'Europa: a forma di conchiglia inclinata verso il Palazzo Pubblico, con la pavimentazione in cotto divisa in nove settori (i \"Noni\") in onore del governo dei Nove (1287-1355), è il palcoscenico del Palio di Siena, la corsa di cavalli più celebre al mondo, disputata il 2 luglio e il 16 agosto con la partecipazione delle 17 Contrade cittadine.","Il Palazzo Pubblico (XIII-XIV sec.) con la Torre del Mangia (1338-1348, 87 m) è uno dei capolavori dell'architettura gotica civile italiana; al suo interno la Sala del Mappamondo ospita il \"Planisfero\" di Ambrogio Lorenzetti e la famosa \"Maestà\" di Simone Martini."]},{"id":"A089","s":"A","t":"Chianti, Pienza, Val d'Orcia e paesaggi vitivinicoli della Toscana","r":"Toscana","l":"","u":true,"c":"Paesaggio Culturale","b":["La Val d'Orcia è dichiarata Patrimonio UNESCO dal 2004 come \"paesaggio culturale\": le colline dolci e ondulate con le cypressaie, i calanchi argillosi, le fattorie medievali, i mulini e i borghi torreschi sono il paesaggio toscano per antonomasia, immortalato nella pittura quattrocentesca (Ambrogio Lorenzetti, Simone Martini) e diventato icona del paesaggio italiano nel mondo.","Montalcino, Montepulciano, San Quirico d'Orcia, Bagni Vignoni con la sua piazza-terme medievale, Castiglione d'Orcia e Radicofano sono i borghi più importanti.","Pienza, la \"città ideale\" realizzata dal papa Pio II Piccolomini nel 1459-1462 su progetto di Bernardo Rossellino, è il primo esempio di intervento urbanistico rinascimentale su scala urbana (precedendo Ferrara): la piazza centrale con il Duomo, il Palazzo Piccolomini, il Palazzo Vescovile e il Palazzo Comunale è una realizzazione compiuta della città ideale secondo i canoni dell'Umanesimo."]},{"id":"A090","s":"A","t":"Cappelle Medicee","r":"Toscana – Firenze","l":"","u":false,"c":"Sito Religioso","b":["Le Cappelle Medicee sono il mausoleo della famiglia Medici, annesso alla Basilica di San Lorenzo a Firenze, e ospitano alcune delle sculture più importanti di Michelangelo Buonarroti.","Il complesso si articola in tre spazi: la Cripta, dove sono sepolti i Medici più antichi; la Cappella dei Principi, iniziata nel 1602 per volere di Cosimo I e completata solo nel 1962, un'immensa sala ottagonale rivestita di marmi preziosi e pietre dure che vuole essere il monumento alla grandezza della dinastia; la Sagrestia Nuova, progettata e parzialmente realizzata da Michelangelo tra il 1521 e il 1534.","La Sagrestia Nuova è il cuore pulsante del complesso: Michelangelo, in risposta alla Sagrestia Vecchia di Brunelleschi, progettò un ambiente in marmo bianco e pietra serena di assoluta perfezione architettonica che fa da cornice alle quattro sculture allegoriche sui sepolcri di Lorenzo duca di Urbino e Giuliano duca di Nemours. \"L'Aurora\" e il \"Crepuscolo\" sul sepolcro di Lorenzo, \"La Notte\" e \"Il Giorno\" su quello di Giuliano, sono tra le sculture più studiate e ammirate della storia dell'arte: i corpi muscolosi in tensione plastica, il doppio enigmatico delle figure femminili dormenti e quelle maschili svegli, il senso di malinconia cosmica del tempo che passa – tutto riflette il Michelangelo maturo alle prese con i grandi temi della morte e della gloria. 104"]},{"id":"A091","s":"A","t":"Dolomiti e Lago di Braies","r":"Provincia Autonoma di Bolzano","l":"","u":true,"c":"Parco Naturale / Paesaggio","b":["Le Dolomiti sono state dichiarate Patrimonio UNESCO nel 2009 come \"Paesaggio naturale di straordinaria bellezza\" per la combinazione unica di morfologia rocciosa, biodiversità e paesaggio culturale.","Il gruppo dolomitico si estende su cinque province (Bolzano, Trento, Belluno, Udine, Pordenone) con vette che superano i 3.000 m (la Marmolada a 3.343 m è il tetto delle Dolomiti).","La roccia dolomia – un carbonato di calcio e magnesio che prende il nome dal geologo francese Déodat de Dolomieu che la studiò a fine '700 – si erge in torri, guglie e pareti verticali di colori che vanno dal bianco al rosa al rosso secondo le ore del giorno (l'\"enrosadira\" al tramonto)."]},{"id":"A092","s":"A","t":"Piazza Duomo di Trento","r":"Provincia Autonoma di Trento","l":"","u":false,"c":"Sito Religioso","b":["Trento è una città di straordinaria importanza storica, nota soprattutto per il Concilio di Trento (1545-1563), uno degli eventi più importanti della storia della Chiesa Cattolica: convocato da Paolo III per rispondere alla Riforma Protestante di Lutero, il concilio ridefinì i fondamenti dottrinali, liturgici e disciplinari del cattolicesimo (la Controriforma) e produsse l'edizione definitiva del Credo Niceno-Costantinopolitano e del Catechismo Romano.","La città, situata nel fondovalle dell'Adige all'imbocco delle Alpi, fu per secoli sede di un principato episcopale.","Piazza del Duomo è il cuore della città: la Cattedrale di San Vigilio (XII-XIV sec.) in stile romanico- gotico fu il teatro del Concilio nella sua prima e seconda fase; all'interno si conservano la tomba del vescovo Bernardo Clesio e la cappella di San Vigilio con affreschi."]},{"id":"A093","s":"A","t":"Cattedrale di San Lorenzo di Perugia","r":"Umbria","l":"","u":false,"c":"Sito Religioso","b":["Perugia, capitale dell'Umbria, è una delle città medievali più belle d'Italia, arroccata su una collina a 493 m con un centro storico labirintico di vicoli medievali, archi e salite.","La Cattedrale di San Lorenzo (XIV-XV sec.) si affaccia sulla magnifica Piazza IV Novembre, cuore della città medievale: la piazza ospita anche il Palazzo dei Priori (XIII-XIV sec.), uno dei più importanti edifici pubblici medievali italiani, con la collezione della Galleria Nazionale dell'Umbria (Perugino, Pinturicchio, Piero della Francesca, Beato Angelico), e la celebre Fontana Maggiore (1278, Nicola e Giovanni Pisano), decorata con 50 pannelli scolpiti con scene bibliche, allegorie e scene della vita civile perugina.","La Cattedrale ha una facciata incompiuta (non fu mai finita) con il pulpito esterno dove Bernardino da Siena predicava e con l'anello nuziale di Maria (un anello di onice grigio-verde, conservato in un reliquiario), ostentato ogni anno il 30 luglio."]},{"id":"A094","s":"A","t":"Parco Archeologico di Carsulae","r":"Umbria","l":"","u":false,"c":"Sito Archeologico","b":["Carsulae è un sito archeologico romano di straordinario interesse, situato nella Valle del Nera presso Terni, lungo l'antica Via Flaminia.","Fondata come stazione di sosta sulla consolare nel III sec. a.C., Carsulae raggiunse l'apice come municipio romano tra il I sec. a.C. e il II sec. d.C., con un impianto urbanistico regolare tipico delle città romane pianificate.","Fu abbandonata definitivamente nel Tardo Antico, probabilmente a causa di un terremoto e della costruzione di un percorso alternativo della Via Flaminia."]},{"id":"A095","s":"A","t":"Duomo di Orvieto","r":"Umbria","l":"","u":false,"c":"Sito Religioso","b":["Il Duomo di Orvieto (Terni) è considerato da molti il più bello d'Italia e uno dei più magnifici del mondo medievale: costruito dal 1290 su ordine del papa Niccolò IV per custodire il Corporale del Miracolo di Bolsena (1263, il miracolo eucaristico che diede origine alla festa del Corpus Domini), la facciata gotica è un tripudio di mosaici dorati, bassorilievi, pinnacoli e rosone che abbaglia il visitatore che sbuca dalla stretta via del centro storico medievale.","I quattro pilastri della facciata sono decorati da bassorilievi biblici di Maitani (primo Trecento) tra i capolavori della scultura gotica italiana.","Il rosone, i mosaici (rifatti nei secoli, gli originali sono in museo) e le guglie contribuiscono a creare un effetto di stupore che pochi edifici sanno eguagliare."]},{"id":"A096","s":"A","t":"Cascate delle Marmore","r":"Umbria","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["Le Cascate delle Marmore, a pochi km da Terni, sono le più alte cascate artificiali d'Europa e una delle creazioni ingegneristiche più spettacolari dell'antichità: create in tre salti per un dislivello complessivo di 165 m nel 271 a.C. dal console romano Manio Curio Dentato per prosciugare le acque stagnanti del lago Velino e riversarle nel fiume Nera.","Il progetto risolse il problema idrologico della Conca di Rieti ma creò una cascata di tale spettacolarità che divenne tappa obbligata del Grand Tour settecentesco.","Lord Byron ne celebrò la bellezza nell'opera poetica \"Childe Harold's Pilgrimage\" (Canto IV, 1818) con versi immortali sulla \"roar\" (ruggito) delle acque; Vincenzo Cardarelli, Charles Dickens e innumerevoli artisti e scrittori si fermarono ad Terni per ammirare la cascata."]},{"id":"A097","s":"A","t":"Parco Nazionale del Gran Paradiso","r":"Valle d'Aosta / Piemonte","l":"","u":false,"c":"Parco Naturale / Paesaggio","b":["Il Parco Nazionale del Gran Paradiso, istituito nel 1922 (il primo parco nazionale italiano), si estende per circa 70.000 ettari tra la Valle d'Aosta e il Piemonte attorno al massiccio del Gran Paradiso (4.061 m), l'unico \"quattromila\" interamente italiano.","L'area era in precedenza riserva di caccia reale dei Savoia (che la cedettero allo Stato nel 1920), il che ha permesso la sopravvivenza dello stambecco alpino (Capra ibex) quando era sull'orlo dell'estinzione: dagli 88 esemplari del 1821 la colonia è cresciuta fino a oltre 4.000, e da qui il re della montagna è stato reintrodotto in tutto l'arco alpino.","Il parco confina con il Parco Naturale Francese della Vanoise e insieme formano la più grande area protetta delle Alpi occidentali."]},{"id":"A098","s":"A","t":"Castello di Quart","r":"Valle d'Aosta","l":"","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["Il Castello di Quart è uno dei castelli medievali più imponenti della Valle d'Aosta, arroccato su uno sperone di roccia che domina la Dora Baltea nel comune di Quart, a pochi km da Aosta.","La Valle d'Aosta è la regione con la più alta densità di castelli medievali d'Italia: più di 70 castelli, molti dei quali tuttora in piedi, testimoniano il ruolo strategico della valle come principale via di transito tra il Nord Italia e le Alpi verso la Francia e la Svizzera.","Il castello di Quart, costruito nei secoli XII-XIV dalla famiglia de Quart e poi passato ai Savoia, presenta una planimetria irregolare adattata alla morfologia della rupe con torri di avvistamento e cinta muraria."]},{"id":"A099","s":"A","t":"Duomo, Criptoportico e Basilica Palladiana di Vicenza","r":"Veneto","l":"","u":true,"c":"Sito Religioso","b":["Vicenza è una città d'arte e architettura di assoluto rilievo, dichiarata Patrimonio UNESCO nel 1994 (e ampliata nel 1996 con le Ville Palladiane del Veneto) per la straordinaria concentrazione di opere di Andrea Palladio (1508-1580), il più influente architetto della storia occidentale.","Le teorie palladiane, codificate nei \"Quattro Libri dell'Architettura\" (1570), influenzarono l'architettura neoclassica di tutta Europa e delle Americhe (Monticello di Thomas Jefferson, il Parlamento inglese, la Banca d'America).","La Basilica Palladiana (1549-1617), con il doppio ordine di loggette che avvolge il palazzo della Ragione medievale con il ritmo dei \"serliani\" palladiani, è il manifesto dell'architettura rinascimentale veneta."]},{"id":"A100","s":"A","t":"Basilica di Sant'Antonio, Prato della Valle e Cappella degli Scrovegni di Padova","r":"Veneto","l":"","u":false,"c":"Sito Religioso","b":["Padova è una città universitaria e d'arte di primo piano: l'Università degli Studi di Padova, fondata nel 1222, è la seconda università più antica del mondo dopo quella di Bologna.","La Cappella degli Scrovegni (1303-1305) ospita gli affreschi di Giotto di Bondone, universalmente riconosciuti come il punto di svolta della pittura occidentale e l'inizio dell'arte moderna: nelle 38 scene della vita di Maria e di Cristo e nel Giudizio Finale, Giotto superò per la prima volta la piattezza e la frontalità dell'arte bizantina per rappresentare figure tridimensionali con emozioni vere, espressioni del viso, dialogo tra personaggi.","Lo sfondo blu cielo (lapis lazuli macinato) e la narrazione commovente hanno stravolto la storia dell'arte."]},{"id":"A101","s":"A","t":"Sistema monumentale di Piazza San Marco: Basilica di San Marco e Palazzo Ducale","r":"Veneto","l":"","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["Piazza San Marco è il salotto d'Europa: Napoleon Bonaparte, quando conquistò Venezia nel 1797 mettendo fine alla Serenissima Repubblica dopo oltre mille anni di vita, la definì \"il più bel salotto d'Europa\" e dispose che non fosse occupata da truppe per non profanarla.","La piazza, unico spazio aperto di Venezia a essere chiamato \"piazza\" (tutti gli altri sono \"campi\" o \"campielli\"), è l'unico spazio orizzontale grande della città lagunare e il punto di convergenza di tutte le anime di Venezia: politica (il Palazzo Ducale), religiosa (la Basilica di San Marco), commerciale (i Procuratie), militare (la Torre dell'Orologio), civica (il Campanile).","Circondata su tre lati dai portici delle Procuratie Vecchie e Nuove e sul quarto aperta sul Bacino di San Marco, la piazza costituisce con la Piazzetta (il prolungamento verso il mare con le colonne di San Marco e San Todaro) uno spazio urbano di proporzioni perfette e di bellezza ineguagliabile."]},{"id":"A102","s":"A","t":"Laguna di Venezia, Canal Grande, Murano, Burano e Torcello","r":"Veneto","l":"","u":true,"c":"Parco Naturale / Paesaggio","b":["La Laguna di Venezia, con i suoi 550 km² di acque basse tra terra e mare, è uno degli ambienti più straordinari e più fragili del pianeta: fondata su palafitte su questo ambiente umido dalle popolazioni venete in fuga dalle invasioni barbariche (V-VI sec.), Venezia sviluppò per secoli la sua unicità di città sull'acqua, costruendo palazzi, chiese e canali in un ecosistema lagunare unico.","La laguna è il Patrimonio UNESCO insieme alla città dal 1987.","Il Canal Grande (4 km, largezza media 50 m) è il \"corso principale\" di Venezia, costeggiato dai palazzi più splendidi: Cà d'Oro (gotico veneziano, XV sec.), Cà Rezzonico (barocco, XVIII sec., sede del Museo del Settecento veneziano), Palazzo Grassi (sede espositiva contemporanea di Pinault) e il Palazzo Corner della Cà Grande."]},{"id":"A103","s":"A","t":"Colline del Prosecco di Conegliano e Valdobbiadene","r":"Veneto","l":"","u":true,"c":"Paesaggio Culturale","b":["Le Colline del Prosecco di Conegliano e Valdobbiadene sono state dichiarate Patrimonio UNESCO nel 2019 come \"paesaggio culturale\": le ripide colline del Trevigiano, con i vigneti a \"ciglione\" (file di viti piantate orizzontalmente su pendii molto ripidi) e i borghi storici, costituiscono un paesaggio prodotto interamente dal lavoro umano nel corso di secoli.","Il Prosecco DOC e DOCG prodotto in quest'area da uve Glera è il vino spumante più venduto al mondo: la produzione è esplosa negli ultimi decenni con milioni di bottiglie esportate in tutto il mondo.","La Strada del Prosecco, istituita nel 1966 (la prima strada del vino in Italia), collega Conegliano a Valdobbiadene attraverso i Colli Trevigiani: i borghi di Refrontolo, Pieve di Soligo, Follina (con l'abbazia cistercense, XII sec.) e Valdobbiadene offrono cantine, ristoranti e panorami straordinari."]},{"id":"A104","s":"A","t":"Ville Palladiane del Veneto","r":"Veneto","l":"","u":true,"c":"Villa Storica","b":["Le Ville Palladiane del Veneto, dichiarate Patrimonio UNESCO nel 1996 insieme a Vicenza, sono un insieme di ventiquattro residenze rurali progettate da Andrea Palladio (o a lui attribuite) nella terraferma veneta, costruite tra il 1540 e il 1580 per la nobiltà veneziana che investiva in agricoltura nelle campagne trevigiane, vicentine e padovane.","Le ville incarnano la fusione tra funzione agricola (la barchessa con i granai, le stalle, le cantine) e residenza signorile nobile, sempre secondo i principi di armonia, simmetria e proporzione di derivazione classica.","Villa Barbaro a Maser (Treviso; su) è la più celebre: costruita nel 1560 per i fratelli Daniele e Marcantonio Barbaro, è decorata all'interno da affreschi di Paolo Veronese (1560-1561) di straordinaria bellezza – i trompe-l'oeil delle logge aperte su paesaggi e le figure illusionistiche che si sporgono dalle porte – e custodisce il Tempietto (piccola cappella palladiana a pianta centrale)."]},{"id":"B01","s":"B","t":"Museo Archeologico Nazionale di Reggio Calabria – Bronzi di Riace","r":"Calabria – Reggio Calabria","l":"","u":false,"c":"Museo","b":["Il Museo Nazionale di Reggio Calabria ospita la più importante collezione di arte della Magna Grecia al mondo e custodisce i Bronzi di Riace, le due statue bronzee di guerrieri greci più celebri e meglio conservate mai rinvenute: scoperti nel 1972 da un sub nel mare di Riace (Reggio Calabria) a 200 m dalla costa e 8 m di profondità, i due \"guerrieri\" (Statua A e Statua B) sono databili al V sec. a.C., periodo classico, e sono attribuiti a scuole artistiche diverse (la statua A forse ad Ageladas di Argo, maestro di Fidia, la statua B forse a Pitagora di Reggio).","Sono tra i rari originali bronzei greci pervenuti.","Le statue colpiscono per la perfezione anatomica, il realismo delle figure (con ossa e denti in avorio, labbra e capezzoli in rame rosso, occhi in vetro, bulbi oculari in avorio), la tensione delle pose e la qualità tecnica della fusione a cera persa."]},{"id":"B02","s":"B","t":"Museo Archeologico Nazionale di Napoli (MANN)","r":"Campania – Napoli","l":"","u":false,"c":"Museo","b":["Il Museo Archeologico Nazionale di Napoli (MANN) è uno dei musei più importanti al mondo per l'antichità classica e la più straordinaria raccolta di arte greco-romana esistente.","Ospitato nel maestoso edificio del Palazzo degli Studi, costruito nel XVII secolo come cavallerizza e poi trasformato in università e infine in museo nel 1816 per volere di Ferdinando I di Borbone, il MANN custodisce oltre 150.000 reperti provenienti da Pompei, Ercolano, Stabiae, Cuma, Capua, Pozzuoli e dagli scavi borbonici in tutta l'Italia meridionale.","La sua fondazione si intreccia con la storia della dinastia borbonica e con la passione collezionistica di Carlo di Borbone, che trasferì a Napoli l'immenso patrimonio della famiglia Farnese ereditato dalla madre Elisabetta Farnese, creando uno dei più grandi musei d'Europa già nel XVIII secolo."]},{"id":"B03","s":"B","t":"Museo di Capodimonte","r":"Campania – Napoli","l":"","u":false,"c":"Museo","b":["Il Museo di Capodimonte sorge su un colle a nord di Napoli, in una posizione panoramica sul Golfo che Carlo di Borbone scelse nel 1738 come sede di una residenza reale e di una pinacoteca degna delle opere ereditate dalla famiglia Farnese.","Il palazzo reale, costruito su progetto di Giovanni Antonio Medrano e poi di Antonio Canevari, fu completato nel corso di oltre un secolo e aperto al pubblico come museo nel 1957: la facciata in mattoni rosati, sobria e maestosa, introduce a un complesso di oltre 100 sale che custodisce una delle più importanti raccolte d'arte d'Italia, con oltre 47.000 opere tra dipinti, sculture, arti decorative, armi e oggetti di uso cortigiano.","Il parco di Capodimonte, disegnato nel XVIII sec. con giardini formali, boschi e viali rettilinei, si estende per 134 ettari attorno al palazzo e ospita una delle più ricche collezioni di scultura all'aperto dell'Italia meridionale."]},{"id":"B04","s":"B","t":"Museo Nazionale di Ravenna","r":"Emilia Romagna – Ravenna","l":"","u":true,"c":"Museo","b":["Il Museo Nazionale di Ravenna è ospitato nell'antico monastero benedettino di San Vitale, adiacente alla celebre basilica, e raccoglie il patrimonio mobile di duemila anni di storia della città che fu capitale dell'Impero Romano d'Occidente, del Regno degli Ostrogoti e dell'Esarcato Bizantino.","Fondato nel 1885 come raccolta civica con l'intento di preservare i reperti dispersi dagli scavi e dagli smembramenti del patrimonio ecclesiastico ravennate, il museo ha sede dal 1913 nell'ex monastero benedettino, i cui chiostri, il refettorio e le celle dei monaci costituiscono una cornice architettonica di grande suggestione per l'esposizione delle collezioni.","La posizione all'interno del perimetro UNESCO dei Monumenti Paleocristiani di Ravenna lo rende parte integrante dell'itinerario culturale obbligatorio della città."]},{"id":"B05","s":"B","t":"Musei Vaticani","r":"Lazio – Città del Vaticano","l":"","u":false,"c":"Museo","b":["I Musei Vaticani costituiscono il più grande complesso museale del mondo, con oltre 70.000 opere esposte in 7 chilometri di percorsi attraverso palazzi, cortili e gallerie che si sviluppano nel cuore della Città del Vaticano.","La loro storia inizia con papa Giulio II, che nel 1503 collocò nel Cortile del Belvedere la scultura del Laocoonte, appena scoperta tra le rovine della Domus Aurea: da quel nucleo iniziale, la raccolta si è accresciuta nei secoli successivi grazie alle acquisizioni sistematiche di ogni pontefice fino a creare uno dei patrimoni artistici più straordinari dell'umanità.","Oggi i Musei accolgono oltre 6 milioni di visitatori all'anno, rendendoli tra i più frequentati al mondo."]},{"id":"B06","s":"B","t":"Galleria Borghese","r":"Lazio","l":"","u":false,"c":"Museo","b":["La Galleria Borghese è considerata da molti la più bella galleria d'arte del mondo per la perfezione dell'abbinamento tra architettura, scultura e pittura, concentrati in un numero limitato di capolavori di qualità assoluta.","Il Casino Borghese fu costruito tra il 1613 e il 1615 da Flaminio Ponzio e Giovanni Vasanzio per il cardinale Scipione Borghese, nipote prediletto di papa Paolo V Borghese e il più importante mecenate della Roma del primo Seicento: l'edificio fu concepito fin dall'inizio non come residenza ma come museo privato, un luogo di rappresentazione del potere e del gusto del cardinale attraverso le opere d'arte.","La collezione fu sacrilegamente impoverita nel 1807, quando Napoleone costrinse il cognato Camillo Borghese a cedere 344 pezzi antichi (oggi al Louvre) in cambio della principessa Paolina Bonaparte; nonostante questa perdita colossale, ciò che rimane è di qualità abbagliante."]},{"id":"B07","s":"B","t":"Galleria Nazionale d'Arte Moderna e Contemporanea di Roma","r":"Lazio – Roma","l":"","u":false,"c":"Museo","b":["La Galleria Nazionale d'Arte Moderna e Contemporanea (GNAM) di Roma è il principale museo italiano dedicato all'arte dei secoli XIX e XX, con una collezione di oltre 20.000 opere tra pitture, sculture, grafica e installazioni.","Fondata nel 1883 in occasione dell'Esposizione Internazionale di Roma e trasferita nell'attuale sede della \"Palazzina delle Belle Arti\" (1911, Cesare Bazzani) ai Prati, la GNAM è un punto di riferimento fondamentale per capire lo sviluppo dell'arte italiana dall'Unità d'Italia a oggi.","La collezione include opere di tutti i principali movimenti artistici italiani: il Neoclassicismo (Canova), il Romanticismo (Hayez), il Realismo (Fattori, Signorini, i Macchiaioli), il Simbolismo e il Divisionismo (Previati, Segantini), il Futurismo (Boccioni, Balla, Severini, Russolo), la Metafisica (De Chirico, Savinio), la Scuola Romana (Mafai, Scipione), l'Informale e la Transavanguardia (Vedova, Fontana, Burri, Clemente, Cucchi)."]},{"id":"B08","s":"B","t":"Museo Nazionale Romano (Palazzo Massimo, Terme di Diocleziano, Crypta Balbi,","r":"Lazio – Roma","l":"","u":false,"c":"Museo","b":["Palazzo Altemps) Il Museo Nazionale Romano è articolato in quattro sedi che insieme costituiscono una delle più grandi raccolte di arte antica del mondo.","Palazzo Massimo alle Terme (sede principale) ospita sculture di eccellenza: le statue del \"Pugile in riposo\" e del \"Principe ellenistico\" in bronzo, i ritratti imperiali, e soprattutto gli affreschi della Villa della Livia a Prima Porta (I sec. a.C.) – un giardino paradisiaco dipinto a trompe-l'oeil su tre pareti che fa di questa sala il più straordinario ambiente dipinto romano conservato.","Le terme di Diocleziano ospitano invece il lapidario con migliaia di iscrizioni latine."]},{"id":"B09","s":"B","t":"Museo Nazionale Etrusco di Villa Giulia","r":"Lazio – Roma","l":"","u":false,"c":"Museo","b":["Il Museo Nazionale Etrusco di Villa Giulia, ospitato nell'omonima villa papale (1551-1553, progettata da Vignola, Vasari e Ammannati per papa Giulio III), è il più importante museo etrusco al mondo e custodisce le testimonianze più significative della civiltà che precedette Roma nell'Italia centrale.","La raccolta è organizzata per provenienze territoriali (Cerveteri, Veio, Vulci, Tarquinia, Palestrina, Preneste) e permette di comprendere la straordinaria complessità e raffinatezza della cultura etrusca.","Il capolavoro assoluto del museo è il \"Sarcofago degli Sposi\" di Cerveteri (fine VI sec. a.C.), una coppia di coniugi in terracotta adagiati sul triclinium nuziale, in posizione sorridente e abbracciata che rivela una concezione dell'amore coniugale e dell'uguaglianza tra i sessi senza precedenti nell'antichità."]},{"id":"B10","s":"B","t":"Musei Capitolini","r":"Lazio – Roma","l":"","u":false,"c":"Museo","b":["I Musei Capitolini, sul Campidoglio (Colle Capitolino), sono i più antichi musei pubblici del mondo: fondati nel 1471 da papa Sisto IV che donò al popolo romano alcune sculture bronzee, sono organizzati in due palazzi affacciati sulla Piazza del Campidoglio disegnata da Michelangelo.","Il Palazzo dei Conservatori e il Palazzo Nuovo conservano la più grande raccolta di scultura antica romana e uno dei più importanti musei d'arte medievale e barocca.","Tra i capolavori spiccano: il Marco Aurelio in bronzo equestre (161-180 d.C., nella piazza il calco, l'originale all'interno), l'unico monumento equestre antico sopravvissuto perché creduto effigie di Costantino; la Lupa Capitolina (V-IV sec. a.C. etrusca, con i gemelli Romolo e Remo aggiunti nel '400 dal Pollaiolo), simbolo di Roma; il Galata Morente e la Venere Capitolina, capolavori della scultura ellenistica; il Fauno Rosso di Prassitele."]},{"id":"B11","s":"B","t":"Palazzo Barberini e Palazzo Corsini – Gallerie Nazionali d'Arte Antica","r":"Lazio – Roma","l":"","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["Le Gallerie Nazionali d'Arte Antica di Roma, distribuite in Palazzo Barberini e Palazzo Corsini, ospitano una delle più importanti collezioni di pittura italiana ed europea dal XII al XVIII secolo.","Palazzo Barberini (1625-1633), costruito per papa Urbano VIII Barberini su progetto di Carlo Maderno, Gian Lorenzo Bernini e Francesco Borromini (la scala elicoidale è di Borromini, quella rettangolare di Bernini), ospita opere di importanza assoluta: il \"Trionfo della Divina Provvidenza\" di Pietro da Cortona (1639) sul soffitto del salone è il capolavoro del barocco illusionistico romano; \"La Fornarina\" di Raffaello (c. 1520), il ritratto della sua amante; \"Giuditta e Oloferne\" di Caravaggio (1599).","Palazzo Corsini (1732-1736, Ferdinando Fuga), sulla riva destra del Tevere in Trastevere, custodisce la collezione Corsini con opere di Rubens, Van Dyck, Beato Angelico e la celebre \"Salomè\" di Guido Reni."]},{"id":"B12","s":"B","t":"Museo di Palazzo Reale di Genova","r":"Liguria – Genova","l":"","u":true,"c":"Museo","b":["Palazzo Reale di Genova è uno dei Palazzi dei Rolli, la rete di residenze nobiliari genovesi UNESCO: costruito per la famiglia Durazzo nel XVII secolo e poi ceduto ai Savoia nel 1824 (da cui il nome \"Reale\"), è il palazzo nobiliare genovese più grande e meglio conservato, aperto al pubblico come museo.","La sontuosità degli interni, con gli stucchi dorati, gli affreschi, gli specchi veneziani e le collezioni d'arte, riflette la ricchezza straordinaria della nobiltà genovese.","La Galleria degli Specchi, ispirata alla Galérie des Glaces di Versailles, è uno degli ambienti più magnifici di Genova: lunga 32 m, con i grandi specchi veneziani che si fronteggiano e moltiplicano lo spazio, i lampadari di cristallo di Boemia e le pitture del soffitto, è il luogo prediletto per le cerimonie di Stato."]},{"id":"B13","s":"B","t":"Pinacoteca di Brera","r":"Lombardia – Milano","l":"","u":false,"c":"Museo","b":["La Pinacoteca di Brera è il più importante museo d'arte del Nord Italia e uno dei grandi musei nazionali europei: ospitata nell'imponente Palazzo di Brera, complesso seicentesco che fu sede del Collegio dei Gesuiti prima di diventare, nel 1776, accademia di belle arti per volere di Maria Teresa d'Austria, la pinacoteca nacque nel 1776 come raccolta didattica per gli studenti dell'Accademia e si arricchì enormemente in seguito alle soppressioni napoleoniche degli ordini religiosi, quando centinaia di dipinti provenienti da chiese e conventi lombardi, veneti, marchigiani e umbri confluirono a Brera.","Oggi la collezione conta oltre 1.500 opere tra i secoli XIII e XX e costituisce una sintesi straordinaria della pittura italiana nelle sue principali scuole regionali.","La grande pala d'altare è il genere in cui Brera eccelle: la Pala di Montefeltro di Piero della Francesca (1472-1474), commissionata dal Duca di Urbino Federico da Montefeltro come ex-voto per la nascita del figlio Guidobaldo, è uno dei capolavori assoluti del Rinascimento italiano."]},{"id":"B14","s":"B","t":"Cenacolo vinciano","r":"Lombardia – Milano","l":"","u":false,"c":"Museo","b":["L'Ultima Cena di Leonardo da Vinci, dipinta tra il 1494 e il 1498 nel refettorio del convento domenicano di Santa Maria delle Grazie a Milano, è la più famosa opera d'arte del mondo e uno dei grandi enigmi della storia dell'arte: un'opera in stato di degrado avanzato già cinquant'anni dopo la sua esecuzione, più volte ridipinta, mutilata, quasi distrutta dai bombardamenti del 1943, e tuttavia sopravvissuta come oggetto di culto e di studio inesauribile attraverso i secoli.","Il dipinto misura 8,8 x 4,6 metri ed è realizzato su intonaco con tempera a uovo e pittura ad olio: Leonardo sperimentò questa tecnica mista per poter correggere e rifinire il dipinto con la lentezza e l'attenzione che la tecnica ad affresco non consentiva.","Ma l'esperimento fallì sul piano della durabilità: già nel 1517, a vent'anni dall'esecuzione, il frate Antonio de Beatis annotava che il dipinto era \"ottimamente fatto, benché cominci un poco a deteriorarsi\"."]},{"id":"B15","s":"B","t":"Museo Egizio di Torino","r":"Piemonte – Torino","l":"","u":false,"c":"Museo","b":["Il Museo Egizio di Torino è il secondo museo egizio più importante al mondo dopo quello del Cairo, con una collezione di oltre 30.000 reperti che coprono ogni aspetto della civiltà egizia dall'epoca predinastica all'età copta (4.000 a.C. - VII sec. d.C.).","La collezione fu avviata dal re Carlo Felice nel 1824 con l'acquisizione della raccolta di Bernardino Drovetti, console generale di Francia in Egitto, e integrata dagli scavi della Missione Archeologica Italiana nel Sudan egiziano (1903-1906) guidata da Ernesto Schiaparelli.","I capolavori sono numerosi e di eccezionale qualità: la Tomba di Kha e Merit (XVIII dinastia, 1400 a.C.), trovata intatta nel 1906 a Deir el-Medina con tutti i corredi funerari in perfetto stato di conservazione, è la tomba di un architetto reale con la moglie e permette una visione unica della vita privata egizia; il Tempietto di Ellesija (I sec. a.C.-I sec. d.C.), smontato blocco per blocco e trasportato in Italia come dono del governo egiziano; la Galleria dei Re con le statue monumentali dei faraoni; i papiri geroglifici tra cui il \"Libro dei Morti\"."]},{"id":"B16","s":"B","t":"Musei Reali di Torino (Palazzo Reale e Galleria Sabauda)","r":"Piemonte – Torino","l":"","u":false,"c":"Museo","b":["I Musei Reali di Torino, aperti al pubblico come polo museale integrato nel 2016, riuniscono il Palazzo Reale, la Galleria Sabauda, il Museo di Antichità, l'Armeria Reale, la Biblioteca Reale e la Cappella della Sacra Sindone in un unico percorso di visita che racconta la storia della dinastia Savoia e della capitale del primo regno d'Italia.","Palazzo Reale (XVII sec.) fu la principale residenza dei Duchi di Savoia e poi dei Re d'Italia (fino al 1865): gli interni sfarzosi con stucchi dorati, arazzi, specchiere, porcellane di Sèvres e mobili intarsiati rivelano tre secoli di vita di corte.","La Cappella della Sacra Sindone, opera di Guarino Guarini (1694), è un capolavoro dell'architettura barocca: la cupola interna a nervature intrecciate che si eleva vertiginosamente è una delle soluzioni strutturali più audaci della storia dell'architettura."]},{"id":"B17","s":"B","t":"Museo Archeologico Nazionale MArTA di Taranto","r":"Puglia – Taranto","l":"","u":false,"c":"Museo","b":["Il Museo Nazionale Archeologico di Taranto (MArTA) è uno dei più importanti musei di archeologia del Mediterraneo, custodendo la più grande e più ricca collezione di oreficeria greca e di ceramiche magno-greche al mondo.","Taranto (l'antica Tarás/Tarentum) fu fondata nel 706 a.C. da coloni spartani ed è l'unica colonia spartana della Magna Grecia: divenne la città più ricca e potente del Sud Italia nel IV sec. a.C., con filosofi come Archita di Taranto (matematico pitagorico, amico di Platone), generali e artisti di primo piano.","Il museo conserva i gioielli d'oro di Taranto – braccialetti, orecchini, diademi, collane, anelli e pettorali – di qualità e quantità senza eguali nel mondo antico: la collezione copre otto secoli (VIII-I sec. a.C.) e include pezzi di raffinatezza tecnica straordinaria come i \"tremblant\" (ornamenti con elementi vibranti) e i gioielli a filigrana."]},{"id":"B18","s":"B","t":"Museo Archeologico Nazionale di Cagliari","r":"Sardegna – Cagliari","l":"","u":false,"c":"Museo","b":["Il Museo Archeologico Nazionale di Cagliari, nel complesso della Cittadella dei Musei sul colle di Buoncammino, è il principale museo della Sardegna e custodisce i reperti più importanti della storia dell'isola dall'età preistorica all'alto Medioevo.","La collezione permette di seguire lo sviluppo delle civiltà che si sono succedute in Sardegna: la cultura di Ozieri (IV-III millennio a.C.), i nuraghi, la civiltà fenicio-punica e quella romana.","I pezzi più celebri sono i bronzetti nuragici (IX-VI sec. a.C.): piccole sculture in bronzo fuso a cera persa che raffigurano guerrieri, sacerdoti, madri con bambini, animali e barchette, con un'espressività e una sintesi formale di straordinaria modernità."]},{"id":"B19","s":"B","t":"Museo Archeologico Regionale \"Paolo Orsi\"","r":"Sicilia – Siracusa","l":"","u":false,"c":"Museo","b":["Il Museo Archeologico Regionale Paolo Orsi di Siracusa è il più importante museo di archeologia della Sicilia e uno dei più significativi d'Italia per la civiltà greca, raccogliendo oltre 18.000 opere che documentano la storia dell'isola dalla preistoria all'età medievale.","Fondato nel 1886 e intitolato al grande archeologo trentino Paolo Orsi (1859-1935), che per quarant'anni condusse ricerche sistematiche in tutta la Sicilia orientale rivoluzionando la comprensione della preistoria e della colonizzazione greca dell'isola, il museo è ospitato dal 1988 in un edificio moderno a forma di trifoglio nei giardini della Villa Landolina, in posizione panoramica sulla città barocca siracusana.","La sua collezione è il risultato di più di un secolo di scavi condotti dalla Soprintendenza in decine di siti della Sicilia orientale."]},{"id":"B20","s":"B","t":"Galleria degli Uffizi","r":"Toscana – Firenze","l":"","u":false,"c":"Museo","b":["La Galleria degli Uffizi è il museo d'arte rinascimentale più importante del mondo e il terzo museo più visitato d'Italia, con circa 4 milioni di visitatori all'anno.","Il palazzo degli Uffizi fu costruito da Giorgio Vasari tra il 1560 e il 1580 per volere di Cosimo I de' Medici come sede degli uffici amministrativi del Ducato di Toscana – da cui il nome – e già al primo piano Cosimo I allestì una tribuna per esporre le collezioni medicee più preziose.","La galleria vera e propria fu istituita da Francesco I de' Medici nel 1581 e aperta agli studiosi nel 1591; nel 1765 il granduca Pietro Leopoldo la aprì al pubblico pagante, facendone uno dei primi musei pubblici d'Europa."]},{"id":"B21","s":"B","t":"Galleria dell'Accademia di Firenze","r":"Toscana – Firenze","l":"","u":false,"c":"Museo","b":["La Galleria dell'Accademia di Firenze è il museo più visitato d'Italia dopo il Colosseo, con quasi 1,8 milioni di visitatori annui, attratti quasi esclusivamente dalla presenza del David di Michelangelo Buonarroti (1501-1504), la scultura più celebre e più fotografata del mondo.","Il museo, fondato nel 1784 dal granduca Pietro Leopoldo d'Asburgo-Lorena come raccolta didattica annessa all'Accademia di Belle Arti di Firenze, nacque con l'intento di fornire agli studenti dell'accademia modelli e riferimenti dell'arte toscana medievale e rinascimentale: la sua vocazione didattica si legge ancora nella disposizione delle opere, che segue criteri cronologici e tipologici.","Il David vi fu trasferito nel 1873 dalla Piazza della Signoria, dove era esposto all'aperto dalla sua realizzazione, per proteggerlo dagli agenti atmosferici; nel 1910 fu costruita appositamente per lui la Tribuna, una sala ottagonale con cupola in vetro che irradia una luce zenitale sulla scultura."]},{"id":"B22","s":"B","t":"Palazzo Pitti, Giardino di Boboli e Ville Medicee della Toscana","r":"Toscana – Firenze, Prato, Pistoia, Lucca","l":"","u":true,"c":"Castello / Palazzo / Sito Monumentale","b":["Palazzo Pitti è il più grande palazzo residenziale di Firenze, un colosso di bugnato rustico in pietra forte che si estende per 205 metri di facciata e domina la sponda sinistra dell'Arno dal Oltrarno.","Costruito per la famiglia Pitti, rivale dei Medici, a partire dal 1457 su progetto attribuito a Brunelleschi o a Luca Fancelli, fu acquistato nel 1549 da Eleonora di Toledo, moglie di Cosimo I de' Medici, che ne fece la residenza principale della famiglia medicea.","Nei secoli successivi il palazzo fu ampliato e trasformato da ogni generazione della famiglia, poi dai Lorena e infine dai Savoia quando Firenze fu capitale d'Italia (1865-1871): il risultato è un complesso di oltre 140.000 mq che ospita oggi cinque musei distinti, il Giardino di Boboli, il Giardino Bardini e la collezione della Silver Collection (Tesoro dei Granduchi)."]},{"id":"B23","s":"B","t":"Gallerie dell'Accademia di Venezia","r":"Veneto – Venezia","l":"","u":false,"c":"Museo","b":["Le Gallerie dell'Accademia di Venezia sono il più importante museo di pittura veneziana al mondo, con una collezione che copre dal XIV al XVIII sec. e permette di seguire lo sviluppo dell'arte lagunare dalle icone bizantine alle tele monumentali del Settecento.","Fondate nel 1807 da Napoleone con l'incamerazione delle opere provenienti da chiese e conventi soppressi, le Gallerie sono ospitate in un complesso medievale-rinascimentale (Scuola Grande della Carità, convento dei Lateranensi, chiesa della Carità).","Tra i capolavori assoluti: \"La Tempesta\" di Giorgione (1505-1510), enigmatico paesaggio notturno con una donna che allatta e un giovane con una lancia che costituisce il primo \"paesaggio per sé\" della storia dell'arte italiana; il \"Convito in casa di Levi\" di Paolo Veronese (originariamente \"Ultima Cena\", 1573), tela monumentale di 13 m di larghezza che fu al centro di un processo inquisitoriale; il ciclo di tele di Gentile Bellini per la Scuola di San Giovanni Evangelista con le Vedute della Venezia del Quattrocento; le Pietà di Giovanni Bellini; i dipinti del Tiziano, del Tintoretto e dei Tiepolo."]},{"id":"C01","s":"C","t":"Alba Fucens","r":"Abruzzo","l":"Massa d’Albe","u":false,"c":"Sito Archeologico","b":["Alba Fucens è una colonia di diritto latino fondata dai Romani alla fine del IV sec a.C. (304/303 a.C.).","È stata riportata alla luce dagli scavi tra 1949 e 1979 dell’Accademia Belgica.","Colonie di diritto latino e di diritto romano."]},{"id":"C02","s":"C","t":"Sassi di Matera","r":"Basilicata","l":"Matera","u":true,"c":"Centro Storico / Città","b":["I Sassi di Matera sono due quartieri storici, il Sasso Barisano e Sasso Caveoso, formati da abitazioni, chiese e monasteri scavati nel tufo della Murgia materana.","Matera sorge infatti su uno sperone calcareo che si affaccia sulla Gravina di Matera [Canyon], una profonda fessura erosiva che separa la città dall'altopiano [plateau] della Murgia.","Sul versante opposto si estende il Parco della Murgia Materana, che protegge oltre 150 chiese rupestri [rock churches]."]},{"id":"C03","s":"C","t":"Capo Colonna","r":"Calabria","l":"10km da Crotone","u":true,"c":"Sito Archeologico","b":["Il Parco Archeologico di Capo Colonna occupa la punta più orientale del promontorio omonimo (noto nell'antichità come Lakinion akron) a 10 km da Crotone, sul Mar Ionio.","Si estende per circa 50 ettari e comprende l'area del parco vero e proprio, una zona boschiva a macchia mediterranea (erede del bosco sacro alla dea) e il museo.","Il cuore del sito è il grande Santuario di Hera Lacinia, santuario extraurbano della colonia achea di Kroton, uno dei più celebri e frequentati dell'intero Mediterraneo occidentale dall' età arcaica fino all'età romana."]},{"id":"C04","s":"C","t":"Parco Archeologico di Scolacium","r":"Calabria","l":"Roccelletta","u":false,"c":"Sito Archeologico","b":["Il Parco Archeologico di Scolacium, immerso in un uliveto secolare tra i più estesi del Mezzogiorno, racconta la storia di Skylletion, città della Magna Grecia, poi prosperosa colonia romana e infine presidio medievale.","Le rovine, composte dal foro [forum], teatro, anfiteatro e basilica normanna, convivono con gli ulivi in un paesaggio di straordinaria suggestione.","Virgilio nell’Eneide (III, 551–553) cita Scylaceum come “rocca che infrange le navi”, a testimonianza della fama del promontorio nella navigazione antica."]},{"id":"C05","s":"C","t":"Reggia di Caserta","r":"Campania","l":"Caserta","u":true,"c":"Castello / Palazzo / Sito Monumentale","b":["La Reggia di Caserta è una delle residenze reali più grandi al mondo e il più importante edificio civile italiano del XVIII secolo.","Patrimonio UNESCO dal 1997, insieme all’Acquedotto Carolino e al Belvedere di San Leucio, costituisce un complesso unitario che comprende palazzo, parco reale, giardino inglese, bosco e acquedotto.","Le sole cifre del palazzo bastano a darne la misura: 247 m di lunghezza, 1.200 stanze, 1.742 finestre, 34 scale, cinque piani su 47.000 m² di superficie."]},{"id":"C06","s":"C","t":"Parco Nazionale del Cilento e Vallo di Diano","r":"Campania","l":"Vallo della Lucania","u":true,"c":"Parco Naturale / Paesaggio","b":["Il Parco Nazionale del Cilento, Vallo di Diano (dall’antico nome di Teggiano, Dianum) e Alburni, istituito nel 1991 con la legge quadro sulle aree protette n. 394, è il secondo parco nazionale italiano per estensione (dopo il Parco nazionale del Pollino) con i suoi 181.048 ettari.","Occupa la parte meridionale della provincia di Salerno, dalla piana del Sele a nord al confine con la Basilicata a est e a sud, fino al Mar Tirreno a ovest, includendo in tutto o in parte i territori di 80 comuni e 8 comunità montane.","È uno dei rari casi mondiali in cui lo stesso territorio porta tre distinti riconoscimenti UNESCO: Riserva della Biosfera MAB (1997), Patrimonio Mondiale (1998) e Geoparco Mondiale (2010), il primo assegnato a un parco nazionale italiano."]},{"id":"C07","s":"C","t":"Area archeologica di Marzabotto","r":"Emilia-Romagna","l":"Marzabotto","u":false,"c":"Sito Archeologico","b":["Kainua è l’unica città etrusca in cui l’impianto urbano ortogonale originario sia rimasto leggibile nella sua quasi totalità: a differenza della generalità delle città etrusche, mai abbandonate e quindi stravolte da successive stratificazioni, Kainua fu occupata dai Galli Boi nel IV sec. a.C. e poi di fatto abbandonata, senza che alcun centro moderno vi si sovrapponesse.","Il pianoro di Misano, sul quale sorgeva la città, è rimasto sostanzialmente intatto, e gli scavi condotti dalla fine dell’Ottocento in poi hanno restituito un tessuto viario, edilizio e sacro di rara integrità.","Il nome Kainua (“città nuova”, dal greco kainós) è attestato da due ciotole rituali in bucchero [bucchero ware, ceramica grigio-nera lucida tipicamente etrusca] iscritte con la formula locativa kainuaθi (\"a Kainua\"), rinvenute nei pressi del tempio di Tinia."]},{"id":"C08","s":"C","t":"I Portici di Bologna","r":"Emilia-Romagna","l":"Bologna","u":true,"c":"Sito Monumentale / Architettura Vernacolare","b":["I portici di Bologna formano il sistema porticato urbano più esteso al mondo: circa 40 km nel solo centro storico, che diventano 62 km includendo i tratti extraurbani.","Iscritti nel Patrimonio Mondiale UNESCO nel 2021 come sito seriale composto da 12 componenti selezionate tra le più rappresentative dell’intero sistema, i portici rappresentano, secondo la motivazione UNESCO, \"un esempio eccezionale di tipologia architettonica di antica origine e ampia diffusione, mai abbandonata fino a oggi, ma in continua evoluzione attraverso le fasi storiche delle trasformazioni urbane\".","Bologna è l’unica città al mondo ad avere sviluppato i portici come elemento identitario permanente, adottato e regolamentato per quasi mille anni senza interruzione."]},{"id":"C09","s":"C","t":"Monumenti Paleocristiani di Ravenna","r":"Emilia-Romagna","l":"Ravenna","u":true,"c":"Sito Religioso","b":["I monumenti paleocristiani di Ravenna sono stati iscritti nel Patrimonio Mondiale UNESCO il 7 dicembre 1996 (dossier n. 788, città di assegnazione: Mérida, Messico) sulla base di quattro criteri espliciti.","Criterio (i): i mosaici costituiscono \"l’espressione suprema dell’arte del mosaico\", impareggiabili per qualità tecnica e integrità.","Criterio (ii): i monumenti testimoniano gli scambi artistici e religiosi tra Occidente e Oriente in un periodo cruciale per la formazione dell’identità europea."]},{"id":"C10","s":"C","t":"Area Archeologica di Aquileia","r":"Friuli-Venezia-Giulia","l":"Aquileia","u":true,"c":"Sito Archeologico","b":["Aquileia è uno degli esempi meglio conservati di città romana della tarda antichità e uno dei luoghi di origine del Cristianesimo nell’Europa centro-orientale.","Iscritta nel Patrimonio UNESCO nel 1998, il sito comprende un’area archeologica di 155 ettari e la Basilica Patriarcale con il più grande mosaico paleocristiano del mondo occidentale.","La particolarità di Aquileia risiede nel fatto che la gran parte della città antica si conserva non ancora scavata nel sottosuolo, rendendola una riserva archeologica unica: ciò che è visibile in superficie è solo una frazione di ciò che ancora attende di essere portato alla luce."]},{"id":"C11","s":"C","t":"Castel Sant’Angelo","r":"Lazio","l":"Roma","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["Castel Sant’Angelo è il monumento che incarna meglio di ogni altro il concetto di riuso adattivo nella storia architettonica europea: lo stesso edificio ha cambiato funzione almeno cinque volte in quasi duemila anni, senza mai essere abbattuto.","Mausoleo imperiale (II sec. d.C.), bastione nelle mura aureliane (III sec.), fortezza pontificia alto-medievale (VI-IX sec.), residenza papale rinascimentale (XV-XVI sec.), prigione di Stato (X-XIX sec.) e infine museo nazionale (XX sec.): ogni fase ha lasciato strati materiali sovrapposti e visibili, rendendo il castello al tempo stesso monumento, area archeologica e museo, come recita la definizione ufficiale della Direzione Musei Nazionali di Roma.","L’edificio originario fu costruito tra il 128 e il 139 d.C. per volere dell’imperatore Adriano, che non fece in tempo a vederlo ultimato: morì nel 138 d.C. e fu il successore Antonino Pio a consacrarlo e a trasferirvi le spoglie imperiali."]},{"id":"C12","s":"C","t":"Domus Aurea","r":"Lazio","l":"Roma","u":true,"c":"Sito Archeologico","b":["La Domus Aurea (\"Casa d’oro\") fu la villa urbana che l’imperatore Nerone fece costruire dopo il grande incendio del 64 d.C., che distrusse tre dei quattordici quartieri di Roma e ne danneggiò gravemente altri sette, bruciando per sei giorni e sette notti.","Nerone si impossessò di circa 80 ettari nel cuore della città (secondo il calcolo di Andrea Carandini, fino a 219 ettari includendo tutte le pertinenze), tra il Palatino, l’Esquilino e il Celio, costruendo una residenza che la tradizione antica definì senza precedenti per sfarzo e dimensioni.","Svetonio ricorda la battuta attribuita a Nerone stesso al primo ingresso nel palazzo: \"Bene!"]},{"id":"C13","s":"C","t":"Villa Adriana a Tivoli","r":"Lazio","l":"Tivoli","u":true,"c":"Villa Storica","b":["Villa Adriana è la più grande e complessa residenza imperiale romana mai costruita, ed è considerata dal Comitato UNESCO \"un capolavoro dell’architettura romana che integra con straordinaria maestria elementi provenienti dalla Grecia, dall’Egitto e da Roma in un’unica sintesi\".","Iscritta nel Patrimonio Mondiale nel 1999, occupa circa 120 ettari sui Monti Tiburtini, a 28 km da Roma, raggiungibili via Via Tiburtina o per navigazione sull’Aniene.","Fu costruita in tre fasi tra il 118 e il 138 d.C. su un preesistente fondo di età sillana pervenuto probabilmente alla moglie di Adriano, Vibia Sabina."]},{"id":"C14","s":"C","t":"Villa d’Este a Tivoli","r":"Lazio","l":"Tivoli","u":true,"c":"Villa Storica","b":["Villa d’Este è il prototipo del giardino formale italiano e uno dei siti UNESCO più visitati del Lazio.","Iscritta nel 2001 per il suo valore come \"esempio eccezionale di giardino rinascimentale italiano e luogo di produzione artistica e intellettuale\", esercitò un’influenza diretta e documentata su tutti i grandi giardini di rappresentanza europei del XVI e XVII sec.: da Versailles a Hellbrunn (Salisburgo) a Vaux-le-Vicomte (progetto originale di Pirro Ligorio a dx).","Il principio fondante del giardino manierista è la subordinazione della natura alla geometria: terrazze scalari, assi longitudinali e trasversali che si incrociano ad angolo retto, fontane come elementi architettonici e scultorei, e un programma iconografico unitario che trasforma il giardino in un testo da leggere."]},{"id":"C15","s":"C","t":"Villa dei Quintili e Santa Maria Nova","r":"Lazio","l":"V miglio dell’Appia Antica","u":false,"c":"Villa Storica","b":["La Villa dei Quintili è la più grande villa suburbana dell’Agro Romano e una delle meglio conservate in Italia: i resti emergono per altezze fino a 15 m e comprendono un complesso termale di dimensioni paragonabili a quelle delle terme pubbliche di una città media, un ippodromo privato, ninfei, cisterne e una rete di ambienti residenziali e di servizio.","La sua superficie originaria copriva circa 24 ettari tra il V miglio dell’Appia Antica e il VII km dell’Appia Nuova.","La denominazione popolare medievale Roma Vecchia testimonia quanto le sue rovine colpissero l’immaginario dei secoli successivi, tanto da sembrare i resti di una città intera."]},{"id":"C16","s":"C","t":"Strade Nuove e Palazzi dei Rolli","r":"Liguria","l":"Genova","u":true,"c":"Centro Storico / Città","b":["Le Strade Nuove e il sistema dei Palazzi dei Rolli di Genova sono stati iscritti nel Patrimonio Mondiale UNESCO il 13 luglio 2006 (sessione di Vilnius, Lituania) con i criteri (ii) e (iv).","Il criterio (ii) riconosce il loro ruolo nello sviluppo dell’architettura manierista e barocca europea, diffuso attraverso la trattatistica architettonica del tempo.","Il criterio (iv) identifica nelle Strade Nuove un esempio eccezionale di insieme urbano che illustra l’economia e la politica di Genova durante il Siglo de los Genoveses (1563-1640)."]},{"id":"C17","s":"C","t":"Arte rupestre in Val Camonica","r":"Lombardia","l":"Val Camonica","u":true,"c":"Sito Archeologico","b":["L’arte rupestre della Val Camonica è il primo sito UNESCO italiano (iscritto nel 1979) e una delle più grandi raccolte di petroglifi [petroglyphs] preistorici del mondo.","Le incisioni sono segnalate su circa 2.000 rocce in oltre 180 località distribuite in 24 comuni della provincia di Brescia, con una concentrazione principale nei comuni di Capo di Ponte, Ceto (Nadro), Cimbergo, Paspardo, Sonico e Sellero.","Il numero di figure censite supera le 300.000 (140.000 al momento dell’iscrizione UNESCO, continuamente aumentate dalle scoperte successive) e copre un arco cronologico di circa 8.000 anni, dall’Epipaleolitico (X-VIII millennio a.C.) all’età romana e oltre, con rare tracce fino al XIX sec."]},{"id":"C18","s":"C","t":"Grotte di Catullo e Museo Archeologico di Sirmione","r":"Lombardia","l":"Penisola di Sirmione, Lago di Garda","u":false,"c":"Museo","b":["Le Grotte di Catullo sono la più grande villa romana dell’Italia settentrionale e uno dei complessi residenziali romani meglio conservati della penisola.","Il nome è un doppio paradosso: non sono grotte (sono i resti emergenti di una villa) e non sono di Catullo.","Le strutture visibili risalgono alla fine del I sec. a.C. o all’inizio del I sec. d.C., almeno cinquant’anni dopo la morte del poeta veronese Gaio Valerio Catullo (ca. 84-54 a.C.)."]},{"id":"C19","s":"C","t":"Parco Archeologico di Urbisaglia","r":"Marche","l":"Urbisaglia","u":false,"c":"Sito Archeologico","b":["Urbs Salvia è il più esteso e monumentale sito romano delle Marche: un’intera città romana di pianura preservata nella sua struttura grazie all’abbandono medievale, che spostò gli abitanti sul colle sovrastante senza sovrapporre nuove costruzioni ai resti antichi.","Il parco (40 ettari) comprende il serbatoio dell’acquedotto, il teatro, l’Edificio a nicchioni, il complesso Tempio-Criptoportico e l’anfiteatro, distribuiti lungo un percorso di circa un chilometro in discesa dal colle medievale al fondovalle.","Il percorso consente di cogliere la struttura a terrazzamenti della città, con un impianto di derivazione ellenistica per la valorizzazione scenografica dei salti di quota."]},{"id":"C20","s":"C","t":"Parco Archeologico di Sepino","r":"Molise","l":"Località Altilia, 3 km da Sepino","u":false,"c":"Sito Archeologico","b":["Saepinum (Altilia) è uno dei siti romani meglio conservati d’Italia e il più importante della regione Molise.","A differenza di Pompei, sepolta dall’eruzione, o di Ostia, abbandonata per impaludamento, Saepinum sopravvisse grazie allo spostamento medievale degli abitanti sul colle sovrastante, che lasciò la città di pianura in un lento abbandono senza demolizioni sistematiche.","Il risultato è una città romana quasi interamente leggibile in pianta: mura, porte, strade, foro, teatro, terme, botteghe e mausolei sono tutti presenti e in gran parte visibili senza ricostruzioni moderne."]},{"id":"C21","s":"C","t":"Mole Antonelliana","r":"Piemonte","l":"Via Montebello 20, Torino","u":false,"c":"Castello / Palazzo / Sito Monumentale","b":["La Mole Antonelliana (167,5 m) è il simbolo di Torino e uno degli edifici storici più alti d’Europa.","Fu inaugurata il 10 aprile 1889, esattamente dieci giorni dopo la Torre Eiffel (31 marzo 1889): le due strutture entrarono immediatamente in competizione nell’immaginario europeo della Belle Époque.","La Mole era il più alto edificio in muratura del mondo (primato mantenuto fino al 1908), la Torre Eiffel il più alto in assoluto (in ferro)."]},{"id":"C22","s":"C","t":"Castello di Racconigi","r":"Piemonte","l":"Racconigi, 34 km da Torino","u":true,"c":"Castello / Palazzo / Sito Monumentale","b":["Il Castello di Racconigi è la principale residenza estiva e autunnale dei Savoia fuori da Torino: una \"residenza di villeggiatura\" nel sistema delle residenze sabaude, a differenza delle regge di rappresentanza come la Venaria o Stupinigi.","La sua storia copre quasi mille anni, dall’XI sec. a oggi, ed è leggibile nella stratificazione degli interventi architettonici: il nucleo medievale dei Marchesi di Saluzzo, la trasformazione barocca di Guarino Guarini (1676), il riallestimento neoclassico di Borra (1757), il grande ampliamento risorgimentale di Carlo Alberto con Ernesto Melano e Pelagio Palagi (dal 1832).","È parte del sito UNESCO seriale \"Residenze Sabaude\" dal 1997."]},{"id":"C23","s":"C","t":"Castel del Monte","r":"Puglia","l":"Andria","u":true,"c":"Castello / Palazzo / Sito Monumentale","b":["Castel del Monte è Patrimonio UNESCO dal 1996 per il rigore matematico e astronomico delle sue forme e per l’armoniosa unione di elementi culturali del Nord Europa, del mondo islamico e dell’antichità classica.","Sorge sulla sommità di una collina delle Murge settentrionali a 539 m s.l.m., visibile per decine di km in tutte le direzioni.","È raffigurato sulla moneta italiana da 1 centesimo di euro ed è il simbolo architettonico più riconoscibile della Puglia."]},{"id":"C24","s":"C","t":"Alberobello","r":"Puglia","l":"Alberobello","u":true,"c":"Sito Monumentale / Architettura Vernacolare","b":["I Trulli di Alberobello sono Patrimonio UNESCO dal 6 dicembre 1996 come \"eccezionale esempio di architettura vernacolare preistorica tuttora in uso\".","Alberobello è l’unico centro urbano al mondo composto quasi interamente da trulli: nel Rione Monti e nel Rione Aia Piccola si concentrano circa 1.500 trulli su una superficie collinare di pochi ettari.","Il termine \"trullo\" deriva dal greco troulos (cupola): la parola designava già in età medievale costruzioni a copertura conica, e fu poi adottata nella forma dialettale pugliese."]},{"id":"C25","s":"C","t":"Su Nuraxi di Barumini","r":"Sardegna","l":"Barumini","u":true,"c":"Sito Archeologico","b":["Su Nuraxi di Barumini è il più grande e meglio conservato nuraghe della Sardegna e il sito più rappresentativo della Civiltà Nuragica, iscritto nel Patrimonio UNESCO nel 1997 come \"capolavoro del genio creativo umano e testimonianza eccezionale di una civiltà scomparsa\".","Il nome in sardo significa semplicemente \"il Nuraghe\": una scelta che riconosce l’eccezionalità del sito rispetto agli altri settemila nuraghi dell’isola.","Sorge in posizione dominante nella Marmilla, la regione di colline e altipiani basaltici a nord di Cagliari, su un’altura da cui si controlla un vasto territorio agricolo."]},{"id":"C26","s":"C","t":"Il Museo della Statuaria preistorica (Menhir)","r":"Sardegna","l":"Palazzo Aymerich, Laconi","u":false,"c":"Sito Archeologico","b":["Una precisazione terminologica utile per l’esame: il termine menhir (dal bretone men = pietra, hir = lunga) indica una pietra infissa verticalmente nel terreno senza lavorazione antropomorfa.","Le opere conservate a Laconi sono invece statue- menhir: pietre lavorate per rappresentare figure umane stilizzate con attributi sessuali, armi e ornamenti.","La distinzione con la stele (lastra con decorazione incisa o a rilievo) è altrettanto importante."]},{"id":"C27","s":"C","t":"Parco Archeologico di Turris Libisonis","r":"Sardegna","l":"Porto Torres","u":true,"c":"Sito Archeologico","b":["Turris Libisonis (l’odierna Porto Torres) fu la prima colonia di diritto romano pienamente romana del nord Sardegna: i suoi abitanti godevano della piena cittadinanza romana, a differenza delle città di diritto latino diffuse nel resto dell’isola.","Fondata tra il 46 e il 41 a.C. da Giulio Cesare o da Ottaviano Augusto (le fonti antiche non sono concordi) sulla foce del Riu Mannu, in un sito già frequentato dai Fenici, è citata da Plinio il Vecchio nella Naturalis Historia come unica città di fondazione romana in Sardegna.","Il nome si compone di Turris (probabilmente dalla radice mediterranea prelatina tyrsis = torre, con possibile riferimento a un nuraghe preesistente sulla foce del fiume) e Libisonis (collegato alla toponomastica protosarda e ai rapporti antichissimi con l’Africa settentrionale, la Libya)."]},{"id":"C28","s":"C","t":"Area archeologica di Agrigento","r":"Sicilia","l":"Agrigento","u":true,"c":"Sito Archeologico","b":["La Valle dei Templi di Agrigento è Patrimonio UNESCO dal 1997 e, con i suoi 1.300 ettari, il più grande parco archeologico d’Europa e del Mediterraneo.","Il nome è improprio: i templi non sorgono in una valle ma su un crinale (la Collina dei Templi) che degrada verso il mare a sud.","La città antica, Akragas, fu fondata nel 581 a.C. da coloni provenienti da Gela e da Rodi in una posizione strategica protetta dalla Rupe Atenea a nord e dalla Collina dei Templi a sud, e bagnata dai fiumi Akragas e Hypsas."]},{"id":"C29","s":"C","t":"Città tardo-barocche della Val di Noto","r":"Sicilia","l":"Sicilia sud-orientale","u":true,"c":"Centro Storico / Città","b":["Le Città tardo barocche del Val di Noto sono Patrimonio UNESCO dal 2002 come sito seriale di 8 città: Caltagirone, Militello in Val di Catania, Catania, Modica, Noto, Palazzolo Acreide, Ragusa e Scicli.","Il Comitato UNESCO le ha riconosciute come \"l’ultima fioritura del Barocco europeo\" e \"il culmine di un lungo sviluppo architettonico e artistico\".","Tutte furono devastate dal terremoto dell’11 gennaio 1693 (magnitudo stimata 7,4), che distrusse 23 città della Sicilia orientale causando oltre 60.000 morti."]},{"id":"C30","s":"C","t":"Monte Etna","r":"Sicilia","l":"Catania","u":true,"c":"Parco Naturale / Paesaggio","b":["L’Etna è il più alto vulcano attivo d’Europa e uno dei più attivi al mondo: in eruzione quasi continuamente da almeno 500.000 anni.","È stato iscritto nel Patrimonio UNESCO il 21 giugno 2013 (XXXVII sessione del Comitato, a Phnom Penh) per il criterio (viii): testimonianza eccezionale dei processi geologici in corso.","Il Parco dell’Etna (istituito nel 1987) tutela 58.000 ettari di ecosistema vulcanico tra i più complessi del Mediterraneo."]},{"id":"C31","s":"C","t":"Palermo arabo-normanna e Cattedrali di Cefalù e Monreale","r":"Sicilia","l":"Palermo, Cefalù, Monreale","u":true,"c":"Museo","b":["Il sito seriale è entrato nella Lista del Patrimonio Mondiale il 3 luglio 2015 (39ª sessione del Comitato, Bonn) con i criteri (ii) e (iv).","Il criterio (ii) riconosce lo scambio eccezionale di valori umani: la Sicilia normanna produsse una sintesi stilistica inedita tra tradizione islamica, bizantina e latina.","Il criterio (iv) identifica il sito come testimonianza eccezionale di una fase storica unica nel Medioevo mediterraneo."]},{"id":"C32","s":"C","t":"Villa Romana del Casale","r":"Sicilia","l":"Piazza Armerina","u":true,"c":"Sito Archeologico","b":["La Villa Romana del Casale è Patrimonio UNESCO dal 1997 per i suoi 3.500 m² di mosaici pavimentali, la più grande raccolta di mosaici romani in situ conservata al mondo.","Il sito fu scoperto e scavato a partire dal 1950 dall’archeologo Gino Vinicio Gentili.","La villa, costruita tra il 320 e il 370 d.C. in età tardoimperiale su una fattoria preesistente, non è una villa rurale in senso classico ma un palazzo di rappresentanza extraurbano: la distinzione tra gli spazi pubblici (per ricevere clienti e ospiti) e quelli privati è netta e documentata dall’articolazione planimetrica."]},{"id":"C33","s":"C","t":"Centro di S. Gimignano","r":"Toscana","l":"San Gimignano","u":true,"c":"Centro Storico / Città","b":["San Gimignano è Patrimonio UNESCO dal 1990 come \"uno dei migliori esempi in Europa di organizzazione urbana dell’età comunale\".","Sorge a 324 m s.l.m. sull’alta Val d’Elsa, nella provincia di Siena, ed è universalmente nota come la \"Manhattan del Medioevo\" per le sue 14 torri medievali superstiti (su 72 originali) che dominano la silhouette della città.","Il centro storico conserva sostanzialmente l’aspetto dei secoli XIII-XIV, con piazze, palazzi comunali, chiese e mura intatti: un caso eccezionale di \"blocco\" urbano causato dal declino economico e politico successivo alla peste del 1348."]},{"id":"C34","s":"C","t":"Ponte Vecchio","r":"Toscana","l":"Firenze","u":true,"c":"Ponte Monumentale","b":["Il Ponte Vecchio è il più antico ponte di Firenze e uno dei simboli più riconoscibili d’Italia.","Fa parte del sito UNESCO \"Centro storico di Firenze\" (iscritto nel 1982).","Il nome nasce per contrasto: quando fu costruito il Ponte alla Carraia (detto allora \"ponte Nuovo\"), quello esistente divenne per la prima volta \"il Vecchio\"."]},{"id":"C35","s":"C","t":"Piazza dei Miracoli","r":"Toscana","l":"Pisa","u":true,"c":"Piazza Monumentale","b":["La Piazza del Duomo di Pisa — nota come Piazza dei Miracoli (nome coniato da Gabriele D’Annunzio nel romanzo Forse che sì forse che no del 1910: \"L’Ardea roteò nel cielo di Cristo, sul prato dei Miracoli\") — è Patrimonio UNESCO dal 1987.","Ospita i quattro monumenti della vita religiosa pisana: Duomo, Battistero, Torre Campanaria (la Torre Pendente) e Camposanto.","La piazza sorge nell’angolo nord-ovest del centro storico, lontano dal centro commerciale medievale: una scelta urbanistica che la rende un recinto sacro separato dal tessuto urbano, aperta sul prato verde che amplifica l’effetto scenografico dei quattro edifici in marmo bianco."]},{"id":"C36","s":"C","t":"Assisi, Basilica di S. Francesco","r":"Umbria","l":"Assisi","u":true,"c":"Sito Religioso","b":["Il sito UNESCO \"Assisi – la Basilica di San Francesco e altri siti francescani\" è stato iscritto nel 2000 (anno del Giubileo) comprendendo, oltre alla Basilica Papale, l’Eremo delle Carceri, la Basilica di Santa Maria degli Angeli con la Porziuncola, la Basilica di Santa Chiara e il Santuario di Rivotorto.","Francesco d’Assisi (1181/1182 - 1226), figlio del ricco mercante Pietro di Bernardone e di Pica Bourlemont, rinunciò pubblicamente all’eredità paterna davanti al vescovo di Assisi, fondò l’Ordine dei Frati Minori (approvato da papa Innocenzo III nel 1209), ricevette le stigmate sul Monte della Verna nel 1224 e compose il Cantico delle Creature (1224 ca.), considerato il primo testo letterario in volgare italiano.","Morì il 3 ottobre 1226 e fu canonizzato appena due anni dopo, il 15 luglio 1228, da papa Gregorio IX."]},{"id":"C37","s":"C","t":"Area megalitica di Saint-Martin-de-Corléans (MegaMuseo)","r":"Val d’Aosta","l":"Aosta","u":false,"c":"Sito Archeologico","b":["L’Area Megalitica di Saint-Martin-de-Corléans è il più importante sito preistorico della Valle d’Aosta e uno dei più straordinari d’Europa: un’area di quasi 10.000 m² coperta da una struttura museale permanente che conserva gli scavi in situ, senza interruzioni visive, rendendola il più grande sito megalitico coperto d’Europa.","Il sito è pluristratificato: le sue tracce storiche coprono oltre seimila anni, dalla fine del Neolitico (V mill. a.C.) attraverso l’Eneolitico (età del Rame), l’età del Bronzo, l’età del Ferro, l’età romana e il Medioevo, fino alla chiesetta romanica di San Martino (XII sec.) che sorge nelle immediate adiacenze, testimonianza di una continuità cultuale ininterrotta sul medesimo luogo.","Il sito fu scoperto casualmente nel giugno 1969, quando gli scavi per la costruzione di condomini nella periferia ovest di Aosta portarono alla luce pietre di dimensioni e lavorazione anomale."]},{"id":"C38","s":"C","t":"Centro storico di Verona","r":"Veneto","l":"Verona","u":true,"c":"Centro Storico / Città","b":["Il Centro Storico di Verona è Patrimonio UNESCO dal 2000 per la sua \"eccezionale stratificazione storica e artistica\" che illustra duemila anni di storia europea: dall’impianto romano al Medioevo scaligero, dalla dominazione veneziana al Rinascimento fino all’età napoleonica e austriaca.","Il sito illustra con continuità il Valore Universale Eccezionale di una città che ha mantenuto la propria funzione urbana senza soluzione di continuità dall’età repubblicana romana.","Verona sorge su un’ansa del fiume Adige nel punto in cui le Prealpi si aprono verso la pianura padana: una posizione strategica che ne fece crocevia delle rotte tra l’Italia e il Nord Europa attraverso il Brennero."]},{"id":"C39","s":"C","t":"Ponte di Rialto","r":"Veneto","l":"Venezia","u":true,"c":"Ponte Monumentale","b":["Il Ponte di Rialto è il più antico dei quattro ponti che attraversano il Canal Grande e uno dei simboli di Venezia nel mondo.","Fa parte del sito UNESCO \"Venezia e la sua laguna\" (iscritto nel 1987).","Il primo attraversamento in questo punto era un ponte di barche degli anni 1170; fu sostituito da un ponte ligneo fisso da Nicolò Barattiero nel XII sec., detto \"ponte della Moneta\" per la zecca vicina."]},{"id":"C40","s":"C","t":"Dolomiti","r":"Veneto","l":"Cortina d’Ampezzo","u":true,"c":"Parco Naturale / Paesaggio","b":["Le Dolomiti sono state iscritte nel Patrimonio Mondiale UNESCO il 26 giugno 2009 (Siviglia) come \"le più belle montagne del mondo\" per i criteri (vii) e (viii).","Il sito comprende 9 sistemi per una superficie totale di 141.903 ettari distribuiti in cinque province di tre regioni: Belluno, Bolzano, Trento, Udine e Pordenone.","I gruppi inclusi nel sito UNESCO sono: Pelmo-Croda da Lago, Marmolada, Pale di San Martino/San Martino di Castrozza/Dolomiti di Feltre, Dolomiti Friulane e d’Oltre Piave, Dolomiti Settentrionali (Tre Cime di Lavaredo, Cadini, Dobbiaco), Puez-Odle, Sciliar-Catinaccio-Latemar, Bletterbach, Dolomiti di Brenta."]}];
+
+
+/* ============================================================
+   ICONS (line-art, 24x24 viewBox, currentColor)
+   ============================================================ */
+const ICONS = {
+"Museo": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5"/><path d="M4 9v10M20 9v10M9 9v10M15 9v10"/><path d="M2 19h20"/><path d="M2 9h20"/></svg>',
+"Sito Archeologico": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21V8c0-.8.7-1.5 1.6-1.8L12 5.4l2.4.8c.9.3 1.6 1 1.6 1.8v13"/><path d="M5 21h14"/><path d="M8 11h8M8 15h8"/><path d="M10 5.4V3M14 5.4V3"/></svg>',
+"Sito Religioso": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M10 4h4"/><path d="M5 21V11a7 7 0 0 1 14 0v10"/><path d="M5 21h14"/><path d="M12 11v10M9 21v-6h6v6"/></svg>',
+"Castello / Palazzo / Sito Monumentale": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l3-2V3h2v3l3-2 3 2V3h2v4l3 2v12"/><path d="M4 9h16M4 21h16"/><path d="M10 21v-5h4v5"/></svg>',
+"Parco Naturale / Paesaggio": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l5-9 4 6 2-3 7 6"/><path d="M3 19h18"/><circle cx="17" cy="6" r="2"/></svg>',
+"Centro Storico / Città": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V11l4-3 4 3v10M3 21h18M11 21V7l5-3 5 3v14"/><path d="M5.5 14h1M5.5 17h1M14.5 11h1M14.5 14h1M14.5 17h1"/></svg>',
+"Paesaggio Culturale": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 19c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/><path d="M2 14c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/></svg>',
+"Villa Storica": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V11l6-5 6 5v10"/><path d="M2 21h20M9 21v-6h2v6"/><path d="M17 21v-4a3 3 0 0 1 3-3"/></svg>',
+"Monumento / Teatro": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18a9 9 0 0 1 18 0"/><path d="M3 18h18M6 18v-3M10 18v-5M14 18v-5M18 18v-3"/></svg>',
+"Sito Monumentale / Architettura Vernacolare": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l5 9H7z"/><path d="M5 21V14h14v7"/><path d="M5 21h14"/><circle cx="12" cy="7.5" r="1"/></svg>',
+"Ponte Monumentale": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18c3-6 17-6 20 0"/><path d="M2 18h20"/><path d="M6 18v-3M12 18v-4M18 18v-3"/></svg>',
+"Piazza Monumentale": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 7v10M7 12h10"/><circle cx="12" cy="12" r="1.4"/></svg>'
+};
+const DEFAULT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>';
+
+const PIN_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+const UNESCO_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.6 6.2L21 9l-5 4.6L17.5 21 12 17.3 6.5 21 8 13.6 3 9l6.4-.8z"/></svg>';
+
+const SECTION_INFO = {
+  A: {label:"Sezione I &mdash; Siti culturali e parchi naturali", sub:"Prova orale", cls:"a"},
+  B: {label:"Sezione II &mdash; Musei", sub:"Prova orale", cls:"b"},
+  C: {label:"Sezione III &mdash; Luoghi della prova tecnico-pratica", sub:"Prova tecnico-pratica", cls:"c"}
+};
+const SECTION_ORDER = ["A","B","C"];
+
+/* ============================================================
+   STATE & RENDER
+   ============================================================ */
+let state = { sec:"ALL", cat:"ALL", unesco:false, q:"" };
+let currentView = 'cards';
+
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function buildStatRow(){
+  const total = DATA.length;
+  const counts = {A:0,B:0,C:0,U:0};
+  DATA.forEach(d=>{counts[d.s]++; if(d.u) counts.U++;});
+  const html = `
+    <div class="stat"><span class="n">${total}</span><span class="lab">Schede totali</span></div>
+    <div class="stat a"><span class="n">${counts.A}</span><span class="lab">Sezione I</span></div>
+    <div class="stat b"><span class="n">${counts.B}</span><span class="lab">Sezione II</span></div>
+    <div class="stat c"><span class="n">${counts.C}</span><span class="lab">Sezione III</span></div>
+    <div class="stat u"><span class="n">${counts.U}</span><span class="lab">Rif. UNESCO</span></div>
+  `;
+  document.getElementById('statRow').innerHTML = html;
+}
+
+function buildCategoryFilter(){
+  const cats = [...new Set(DATA.map(d=>d.c))].sort((a,b)=>a.localeCompare(b,'it'));
+  const sel = document.getElementById('categoryFilter');
+  cats.forEach(c=>{
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    sel.appendChild(opt);
+  });
+}
+
+function matches(d){
+  if(state.sec !== "ALL" && d.s !== state.sec) return false;
+  if(state.cat !== "ALL" && d.c !== state.cat) return false;
+  if(state.unesco && !d.u) return false;
+  if(state.q){
+    const hay = (d.t+" "+d.r+" "+d.l+" "+d.c+" "+d.b.join(" ")).toLowerCase();
+    if(!hay.includes(state.q)) return false;
+  }
+  return true;
+}
+
+function cardAccentVar(sec){
+  return sec === "A" ? "var(--sec-a)" : sec === "B" ? "var(--sec-b)" : "var(--sec-c)";
+}
+
+function renderCard(d){
+  const icon = ICONS[d.c] || DEFAULT_ICON;
+  const accent = cardAccentVar(d.s);
+  const locBits = [d.l, d.r].filter(Boolean);
+  const metaLoc = locBits.length ? locBits.join(", ") : d.r;
+  const unescoBadge = d.u ? `<span class="unesco-badge">${UNESCO_ICON} UNESCO</span>` : "";
+  const bullets = d.b.map(b=>`<li>${escapeHtml(b)}</li>`).join("");
+  return `
+  <article class="card" style="--card-accent:${accent}">
+    <div class="card-top">
+      <span class="card-id">${d.id}</span>
+      <span class="card-icon">${icon}</span>
+    </div>
+    <h3>${escapeHtml(d.t)}</h3>
+    <div class="card-meta">
+      <span class="tag">${PIN_ICON.replace('width="24" height="24"','')}${escapeHtml(metaLoc)}</span>
+    </div>
+    <div class="card-category">${escapeHtml(d.c)}</div>
+    ${unescoBadge}
+    <hr class="rule">
+    <ul class="bullets">${bullets}</ul>
+  </article>`;
+}
+
+function render(){
+  const main = document.getElementById('main');
+  main.innerHTML = "";
+  let totalShown = 0;
+
+  SECTION_ORDER.forEach(sec=>{
+    if(state.sec !== "ALL" && state.sec !== sec) return;
+    const items = DATA.filter(d=>d.s===sec).filter(matches);
+    if(items.length === 0) return;
+    totalShown += items.length;
+    const info = SECTION_INFO[sec];
+    const group = document.createElement('section');
+    group.className = "section-group";
+    group.dataset.sec = sec;
+    group.innerHTML = `
+      <div class="section-group-head">
+        <h2>${info.label}</h2>
+        <span class="count">${items.length} ${items.length===1?'scheda':'schede'}</span>
+      </div>
+      <div class="grid">${items.map(renderCard).join("")}</div>
+    `;
+    main.appendChild(group);
+  });
+
+  if(totalShown === 0){
+    main.innerHTML = `<div class="no-results">Nessuna scheda corrisponde ai filtri selezionati.</div>`;
+  }
+
+  document.getElementById('resultsCount').textContent = `${totalShown} / ${DATA.length} schede mostrate`;
+  if(currentView === 'map') renderMap();
+}
+
+/* ============================================================
+   EVENTS
+   ============================================================ */
+document.getElementById('secSeg').addEventListener('click', e=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  state.sec = btn.dataset.sec;
+  document.querySelectorAll('#secSeg button').forEach(b=>b.classList.toggle('active', b===btn));
+  render();
+});
+
+document.getElementById('categoryFilter').addEventListener('change', e=>{
+  state.cat = e.target.value;
+  render();
+});
+
+const unescoToggle = document.getElementById('unescoToggle');
+unescoToggle.addEventListener('change', e=>{
+  state.unesco = e.target.checked;
+  document.getElementById('unescoToggleWrap').classList.toggle('active', state.unesco);
+  render();
+});
+
+let searchTimer;
+document.getElementById('search').addEventListener('input', e=>{
+  clearTimeout(searchTimer);
+  const val = e.target.value;
+  searchTimer = setTimeout(()=>{
+    state.q = val.trim().toLowerCase();
+    render();
+  }, 120);
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+buildStatRow();
+buildCategoryFilter();
+render();
+
+
+/* ============================================================
+   COORDINATES (geocoded from Nominatim + manual)
+   ============================================================ */
+const COORDS = {
+  "A001": {lat:42.516053,lng:13.656361},
+  "A002": {lat:42.3574226,lng:14.4070959},
+  "A003": {lat:40.5152798,lng:16.1071221},
+  "A004": {lat:40.3740777,lng:16.8100961},
+  "A005": {lat:39.978107,lng:16.296286},
+  "A006": {lat:38.2729597,lng:16.2187558},
+  "A007": {lat:38.2106541,lng:16.2394045},
+  "A008": {lat:38.4801901,lng:16.4682954},
+  "A009": {lat:39.7179672,lng:16.4911298},
+  "A010": {lat:38.909318,lng:17.0236403},
+  "A011": {lat:39.2600107,lng:16.5074912},
+  "A012": {lat:40.5488429,lng:14.2283708},
+  "A013": {lat:40.63367,lng:14.6026095},
+  "A014": {lat:40.8491313,lng:14.0541781},
+  "A015": {lat:40.5370456,lng:15.4550242},
+  "A016": {lat:40.8053613,lng:14.3471036},
+  "A017": {lat:40.4215522,lng:15.0053214},
+  "A018": {lat:40.7491267,lng:14.5006415},
+  "A019": {lat:40.8236627,lng:14.4324642},
+  "A020": {lat:40.8358846,lng:14.2487679},
+  "A021": {lat:44.3640607,lng:12.0590095},
+  "A022": {lat:44.6952006,lng:10.0979869},
+  "A023": {lat:44.8051897,lng:10.325992},
+  "A024": {lat:44.7667642,lng:11.827939},
+  "A025": {lat:44.6463105,lng:10.9255105},
+  "A026": {lat:44.4941992,lng:11.3467671},
+  "A027": {lat:46.0731464,lng:13.4387878},
+  "A028": {lat:45.8517527,lng:13.4893525},
+  "A029": {lat:45.7025321,lng:13.7124557},
+  "A030": {lat:41.8858494,lng:12.5055874},
+  "A031": {lat:41.742829,lng:13.161979},
+  "A032": {lat:41.8861584,lng:12.4853087},
+  "A033": {lat:42.6277081,lng:12.113675},
+  "A034": {lat:41.8909421,lng:12.491903},
+  "A035": {lat:42.2497213,lng:11.7699328},
+  "A036": {lat:41.9954262,lng:12.1515191},
+  "A037": {lat:41.7536374,lng:12.2857399},
+  "A038": {lat:41.898616,lng:12.4768334},
+  "A039": {lat:41.8915659,lng:12.4902082},
+  "A040": {lat:41.9022,lng:12.4539},
+  "A041": {lat:41.8675058,lng:12.5028168},
+  "A042": {lat:41.9009778,lng:12.4832848},
+  "A043": {lat:44.4076283,lng:8.9314092},
+  "A044": {lat:44.1246489,lng:9.7246065},
+  "A045": {lat:45.704038,lng:9.6628983},
+  "A046": {lat:45.4641669,lng:9.1916121},
+  "A047": {lat:45.2527583,lng:9.1256244},
+  "A048": {lat:45.4920264,lng:10.6082636},
+  "A049": {lat:45.1599905,lng:10.7980359},
+  "A050": {lat:45.4676041,lng:9.1891136},
+  "A051": {lat:45.5392611,lng:10.2291054},
+  "A052": {lat:45.9917589,lng:9.264881},
+  "A053": {lat:43.4028026,lng:12.9697294},
+  "A054": {lat:43.7241981,lng:12.6361447},
+  "A055": {lat:42.9144515,lng:13.1884698},
+  "A056": {lat:42.853616,lng:13.5768372},
+  "A057": {lat:43.9427651,lng:12.7743889},
+  "A058": {lat:43.441001,lng:13.6108062},
+  "A059": {lat:44.199934,lng:7.3160469},
+  "A060": {lat:45.1383808,lng:7.0493387},
+  "A061": {lat:44.4107878,lng:7.5526557},
+  "A062": {lat:44.6417,lng:8.0167},
+  "A063": {lat:45.0979911,lng:7.3430477},
+  "A064": {lat:41.1257843,lng:16.8620293},
+  "A065": {lat:40.1522173,lng:18.2260628},
+  "A066": {lat:40.1444624,lng:18.4927109},
+  "A067": {lat:41.2822072,lng:16.418479},
+  "A068": {lat:41.70544,lng:15.967657},
+  "A069": {lat:41.7069106,lng:15.7288455},
+  "A070": {lat:40.6851685,lng:8.3568743},
+  "A071": {lat:40.7234746,lng:8.5612674},
+  "A072": {lat:40.0840316,lng:8.7639366},
+  "A073": {lat:39.9279284,lng:8.4819274},
+  "A074": {lat:39.8745241,lng:8.439903},
+  "A075": {lat:37.5023612,lng:15.0873718},
+  "A076": {lat:36.8589209,lng:14.7613018},
+  "A077": {lat:37.0315752,lng:15.2124277},
+  "A078": {lat:37.9386493,lng:12.8385039},
+  "A079": {lat:37.5888104,lng:12.8244584},
+  "A080": {lat:37.8523709,lng:15.2922708},
+  "A081": {lat:43.7746511,lng:11.2493727},
+  "A082": {lat:43.7731,lng:11.256},
+  "A083": {lat:44.0613167,lng:10.2788792},
+  "A084": {lat:42.6303496,lng:11.1095079},
+  "A085": {lat:43.7076427,lng:11.9309425},
+  "A086": {lat:42.4072829,lng:11.2895444},
+  "A087": {lat:43.016515,lng:11.9477359},
+  "A088": {lat:43.3184391,lng:11.3315583},
+  "A089": {lat:43.0367655,lng:11.6488427},
+  "A090": {lat:43.7750224,lng:11.2533742},
+  "A091": {lat:46.5152608,lng:12.1423594},
+  "A092": {lat:46.0676909,lng:11.1217604},
+  "A093": {lat:43.1125024,lng:12.388836},
+  "A094": {lat:42.6393996,lng:12.5577368},
+  "A095": {lat:42.717,lng:12.1135997},
+  "A096": {lat:42.551162,lng:12.7152476},
+  "A097": {lat:45.5898949,lng:7.3817473},
+  "A098": {lat:45.7515058,lng:7.396739},
+  "A099": {lat:45.5469672,lng:11.5469575},
+  "A100": {lat:45.3984167,lng:11.8763984},
+  "A101": {lat:45.4342571,lng:12.3386717},
+  "A102": {lat:45.3641809,lng:12.2933282},
+  "A103": {lat:45.9037297,lng:12.2653108},
+  "A104": {lat:45.531898,lng:11.5595398},
+  "B01": {lat:38.1146428,lng:15.6511476},
+  "B02": {lat:40.8536064,lng:14.25115},
+  "B03": {lat:40.8676958,lng:14.2505992},
+  "B04": {lat:44.4209255,lng:12.1961682},
+  "B05": {lat:41.9065,lng:12.4534},
+  "B06": {lat:41.9141133,lng:12.4921053},
+  "B07": {lat:41.9172359,lng:12.4825309},
+  "B08": {lat:41.8969226,lng:12.4731719},
+  "B09": {lat:41.9183575,lng:12.4778078},
+  "B10": {lat:41.8926663,lng:12.482201},
+  "B11": {lat:41.9034733,lng:12.4901355},
+  "B12": {lat:44.4149611,lng:8.9257034},
+  "B13": {lat:45.4722421,lng:9.1884071},
+  "B14": {lat:45.4662047,lng:9.170655},
+  "B15": {lat:45.068435,lng:7.6843506},
+  "B16": {lat:45.0730533,lng:7.6869632},
+  "B17": {lat:40.4649,lng:17.2524},
+  "B18": {lat:39.2223534,lng:9.1166477},
+  "B19": {lat:37.0764609,lng:15.2862613},
+  "B20": {lat:43.7683129,lng:11.2558009},
+  "B21": {lat:43.7769174,lng:11.2587579},
+  "B22": {lat:43.7652813,lng:11.2502566},
+  "B23": {lat:45.4313662,lng:12.3280919},
+  "C01": {lat:42.0798256,lng:13.4113423},
+  "C02": {lat:40.6660561,lng:16.6115607},
+  "C03": {lat:39.0251669,lng:17.2010063},
+  "C04": {lat:38.8078098,lng:16.5932594},
+  "C05": {lat:41.0731576,lng:14.3271038},
+  "C06": {lat:40.229704,lng:15.26576},
+  "C07": {lat:44.334887,lng:11.2031309},
+  "C08": {lat:44.5018899,lng:11.3447819},
+  "C09": {lat:44.3640607,lng:12.0590095},
+  "C10": {lat:45.7696144,lng:13.3697982},
+  "C11": {lat:41.9031178,lng:12.4663427},
+  "C12": {lat:41.8912624,lng:12.4951112},
+  "C13": {lat:41.9543131,lng:12.7718103},
+  "C14": {lat:41.9629665,lng:12.7959903},
+  "C15": {lat:41.827862,lng:12.5482575},
+  "C16": {lat:44.4121904,lng:8.9298194},
+  "C17": {lat:46.0536,lng:10.3414},
+  "C18": {lat:45.5009128,lng:10.6067079},
+  "C19": {lat:43.1979106,lng:13.3856105},
+  "C20": {lat:41.408024,lng:14.618331},
+  "C21": {lat:45.0689888,lng:7.6931918},
+  "C22": {lat:44.76928,lng:7.6757614},
+  "C23": {lat:41.0847439,lng:16.2711145},
+  "C24": {lat:40.7841242,lng:17.2377031},
+  "C25": {lat:39.7058674,lng:8.9908939},
+  "C26": {lat:39.852649,lng:9.050435},
+  "C27": {lat:40.8370333,lng:8.4013292},
+  "C28": {lat:37.099993,lng:13.9318446},
+  "C29": {lat:36.8908864,lng:15.0706454},
+  "C30": {lat:37.5445207,lng:14.9186605},
+  "C31": {lat:38.1112268,lng:13.3524434},
+  "C32": {lat:37.3643043,lng:14.3338465},
+  "C33": {lat:43.4678366,lng:11.0431816},
+  "C34": {lat:43.7680254,lng:11.253158},
+  "C35": {lat:43.7230859,lng:10.395321},
+  "C36": {lat:43.0711952,lng:12.6146669},
+  "C37": {lat:45.7373075,lng:7.3204025},
+  "C38": {lat:45.435024,lng:10.9874462},
+  "C39": {lat:45.4380507,lng:12.3359346},
+  "C40": {lat:46.294572,lng:12.0513238},
+};
+
+/* ============================================================
+   MAP VIEW
+   ============================================================ */
+let leafMap = null;
+let mapLayerGroup = null;
+
+function secColor(sec){
+  return sec==='A' ? '#B2502F' : sec==='B' ? '#3C7A6A' : '#28415E';
+}
+
+function initLeafMap(){
+  if(leafMap) return;
+  leafMap = L.map('map-view', {zoomSnap:0, zoomControl:false, maxZoom:18}).setView([42.5,12.5],6);
+  L.control.zoom({position:'topright'}).addTo(leafMap);
+  L.maplibreGL({
+    style:'https://tiles.openfreemap.org/styles/liberty',
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(leafMap);
+  mapLayerGroup = L.layerGroup().addTo(leafMap);
+}
+
+function renderMap(){
+  if(!leafMap) initLeafMap();
+  mapLayerGroup.clearLayers();
+  DATA.filter(matches).forEach(function(d){
+    const c = COORDS[d.id];
+    if(!c || c.lat === null) return;
+    const color = secColor(d.s);
+    const marker = L.circleMarker([c.lat, c.lng], {
+      radius:7, fillColor:color, color:'#fff',
+      weight:1.5, opacity:1, fillOpacity:0.85,
+    });
+    const locBits = [d.l, d.r].filter(Boolean);
+    const metaLoc = locBits.length ? locBits.join(', ') : d.r;
+    const unescoBadge = d.u ? '<span class="map-popup-unesco">&#9733; UNESCO</span>' : '';
+    marker.bindPopup(
+      '<div class="map-popup">' +
+        '<span class="map-popup-id" style="background:'+color+'">'+d.id+'</span>' +
+        '<h4>'+escapeHtml(d.t)+'</h4>' +
+        '<div class="map-popup-meta">'+escapeHtml(metaLoc)+' &mdash; '+escapeHtml(d.c)+'</div>' +
+        unescoBadge +
+      '</div>',
+      {maxWidth:260}
+    );
+    mapLayerGroup.addLayer(marker);
+  });
+  setTimeout(function(){ leafMap.invalidateSize(); }, 0);
+}
+
+function setView(view){
+  currentView = view;
+  const isMap = view === 'map';
+  document.getElementById('main').classList.toggle('map-active', isMap);
+  document.querySelector('footer').classList.toggle('map-active', isMap);
+  document.getElementById('map-view').classList.toggle('active', isMap);
+  document.querySelectorAll('#viewSeg button').forEach(function(b){
+    b.classList.toggle('active', b.dataset.view === view);
+  });
+  if(isMap) renderMap();
+}
+
+document.getElementById('viewSeg').addEventListener('click', function(e){
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  setView(btn.dataset.view);
+});
+</script>
+</body>
+</html>
